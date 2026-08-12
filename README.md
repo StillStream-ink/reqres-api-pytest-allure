@@ -57,10 +57,12 @@ allure serve allure-results
 ## 📊 效果预览
 
 ### 全量回归通过（100% Passed）
+![Allure全量通过](./assets/allure_pass_100.png)
 
-多轮回归 Trend 趋势监控
-
+### 多轮回归 Trend 趋势监控
+![Allure Trend趋势图](./assets/allure_trend_fail.png)
 > 前两轮全量通过，第三轮构造异常场景模拟缺陷，直观展示接口迭代质量波动
+
 
 ## 📌 测试范围
 
