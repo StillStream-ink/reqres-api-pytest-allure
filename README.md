@@ -1,6 +1,4 @@
-# ReqRes 接口自动化测试项目
-
-![CI](https://github.com/StillStream-ink/reqres-api-pytest-allure/actions/workflows/pytest-auto.yml/badge.svg)
+# ReqRes 接口自动化测试项目 ![CI](https://github.com/StillStream-ink/reqres-api-pytest-allure/actions/workflows/pytest-auto.yml/badge.svg)
 
 
 > 基于 Pytest + Requests + Allure 搭建的接口自动化测试框架，针对 ReqRes 公开接口实现自动化回归测试，生成可视化测试报告。
