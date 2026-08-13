@@ -1,0 +1,16 @@
+post:
+  create_info:
+    title: 接口自动化测试
+    body: pytest+requests完成业务流程自动化
+    userId: 1
+  update_info:
+    title: 自动化测试-更新
+    body: 修改后的业务数据
+    userId: 1
+
+user:
+  update_info:
+    name: "测试人员-更新"
+    username: "apitest"
+    email: "test@demo.com"
+
