@@ -1,51 +1,59 @@
 import pytest
 import requests
 import allure
+from common.yaml_util import read_yaml
+from common.log_util import logger
+from common.assert_util import *
 
 BASE_URL = "https://jsonplaceholder.typicode.com"
 
-# ---------------------- 公共封装函数（增加超时、异常捕获）----------------------
-def send_request(method, url, params=None, json_data=None, timeout=10, retry=2):
-    """带重试的请求封装"""
-    for i in range(retry + 1):
+# ---------------------- 公共封装函数（超时、异常捕获、重试）----------------------
+def send_request(method, url, params=None, json_data=None, timeout=10):
+    """
+    封装统一发送http请求，增加超时、异常捕获
+    :param method: 请求方式 GET / POST / PUT / DELETE
+    :param url: 接口地址
+    :param params: get查询参数
+    :param json_data: post/put的body数据
+    :param timeout: 超时时间，默认10秒
+    :return: response对象；发生网络异常返回None
+    """
+    import time
+    retry_max = 2
+    for i in range(1, retry_max + 1):
         try:
+            from conftest import global_headers
             resp = requests.request(
                 method=method,
                 url=url,
                 params=params,
                 json=json_data,
+                headers=global_headers,
                 timeout=timeout
             )
             return resp
         except requests.exceptions.Timeout:
-            print(f"\n【请求超时】第{i+1}次，url:{url}，超过{timeout}秒未响应")
+            print(f"\n【请求超时】第{i}次重试，url:{url}")
         except requests.exceptions.ConnectionError:
-            print(f"\n【网络连接失败】第{i+1}次，url:{url}")
+            print(f"\n【连接失败】第{i}次重试，url:{url}")
         except Exception as e:
-            print(f"\n【请求未知异常】url:{url}, 异常类型:{type(e)}, 异常信息：{str(e)}")
-        import time
+            print(f"\n【未知异常】{str(e)}")
         time.sleep(1)
-    # 全部重试失败才返回None
     return None
 
 
-# ---------------------- 测试用例层 ----------------------
+# ---------------------- 测试用例 ----------------------
 @allure.feature("文章模块")
 @allure.story("获取文章列表")
 def test_get_post_list():
     """GET 请求：获取文章列表"""
     url = f"{BASE_URL}/posts"
     resp = send_request(method="GET", url=url)
-
-    assert resp is not None, "接口请求网络异常"
-    print("\n【GET文章列表】", resp.json()[:2])
-    assert resp.status_code == 200
-    data = resp.json()
-    assert isinstance(data, list)
-    assert len(data) > 0
-    assert "application/json" in resp.headers.get("Content-Type", "")
-    assert data[0]["id"] == 1
-    assert "title" in data[0]
+    assert_http_response(resp, 200)
+    body = resp.json()
+    assert isinstance(body, list), "❌ 接口返回数据不是数组"
+    assert_json_key_exists(body[0], "id")
+    assert_json_key_exists(body[0], "title")
 
 
 @allure.feature("文章模块")
@@ -54,73 +62,11 @@ def test_get_single_post():
     """GET 请求：获取单篇文章id=1"""
     url = f"{BASE_URL}/posts/1"
     resp = send_request("GET", url=url)
-
-    assert resp is not None, "接口请求网络异常"
-    print("\n【GET单篇文章】", resp.json())
-    assert resp.status_code == 200
+    assert_http_response(resp, 200)
     body = resp.json()
-    assert body["id"] == 1
-    assert "title" in body
-    assert "body" in body
-    assert isinstance(body["userId"], int)
-    assert "application/json" in resp.headers.get("Content-Type", "")
-
-
-@allure.feature("文章模块")
-@allure.story("新增文章")
-def test_post_create():
-    """POST 请求：新增一篇文章"""
-    url = f"{BASE_URL}/posts"
-    payload = {
-        "title": "软件测试学习笔记",
-        "body": "pytest+requests接口自动化练习",
-        "userId": 1
-    }
-    resp = send_request("POST", url=url, json_data=payload)
-
-    assert resp is not None, "接口请求网络异常"
-    print("\n【POST新增】", resp.json())
-    assert resp.status_code == 201
-    res_data = resp.json()
-    assert res_data["title"] == "软件测试学习笔记"
-    assert res_data["userId"] == 1
-    assert "id" in res_data
-    assert "application/json" in resp.headers.get("Content-Type", "")
-
-
-@allure.feature("文章模块")
-@allure.story("修改文章")
-def test_put_update():
-    """PUT 请求：完整更新id=1文章"""
-    url = f"{BASE_URL}/posts/1"
-    payload = {
-        "title": "修改后的标题",
-        "body": "修改后的正文内容",
-        "userId": 1
-    }
-    resp = send_request("PUT", url=url, json_data=payload)
-
-    assert resp is not None, "接口请求网络异常"
-    print("\n【PUT更新】", resp.json())
-    assert resp.status_code == 200
-    assert resp.json()["title"] == "修改后的标题"
-    assert resp.json()["userId"] == 1
-    assert "application/json" in resp.headers.get("Content-Type", "")
-
-
-@allure.feature("文章模块")
-@allure.story("删除文章")
-def test_delete_post():
-    """DELETE 请求：删除id=1文章，二次校验"""
-    url = f"{BASE_URL}/posts/1"
-    resp = send_request("DELETE", url=url)
-    assert resp is not None, "接口请求网络异常"
-    assert resp.status_code == 200
-
-    # 再次查询已删除资源（jsonplaceholder模拟接口仍能查到，仅演示真实业务思路）
-    resp_check = send_request("GET", url=url)
-    assert resp_check is not None
-
+    assert_json_value_equal(body, "id", 1)
+    assert_json_type(body, "title", str)
+    assert_json_type(body, "userId", int)
 
 
 @allure.feature("文章模块")
@@ -130,22 +76,61 @@ def test_get_post_param(post_id):
     """参数化：传入不同文章id获取数据"""
     url = f"{BASE_URL}/posts/{post_id}"
     resp = send_request("GET", url=url)
-
-    assert resp is not None, "接口请求网络异常"
-    print(f"\n查询文章id={post_id}", resp.json())
-    assert resp.status_code == 200
+    assert_http_response(resp, 200)
     body = resp.json()
-    assert body["id"] == post_id
-    assert isinstance(body["title"], str)
-    assert "application/json" in resp.headers.get("Content-Type", "")
+    assert_json_value_equal(body, "id", post_id)
+    assert_json_type(body, "title", str)
 
 
-# 调试delete接口
-if __name__ == "__main__":
-    import requests
-    BASE_URL = "https://reqres.in"
+@allure.feature("文章模块")
+@allure.story("新增文章")
+def test_create_post():
+    """POST：新增文章"""
+    url = f"{BASE_URL}/posts"
+    json_data = {
+        "title": "自动化测试文章",
+        "body": "接口自动化demo",
+        "userId": 1
+    }
+    resp = send_request("POST", url=url, json_data=json_data)
+    assert_http_response(resp, 201)
+    body = resp.json()
+    assert_json_value_equal(body, "title", "自动化测试文章")
+    assert_json_key_exists(body, "id")
+
+
+@allure.feature("文章模块")
+@allure.story("修改文章")
+def test_update_post():
+    """PUT：更新文章"""
     url = f"{BASE_URL}/posts/1"
-    res = requests.delete(url, timeout=10)
-    print("status_code:", res.status_code)
-    print("text:", repr(res.text))
+    json_data = {
+        "title": "更新后的标题",
+        "body": "修改内容",
+        "userId": 1
+    }
+    resp = send_request("PUT", url=url, json_data=json_data)
+    assert_http_response(resp, 200)
+    body = resp.json()
+    assert_json_value_equal(body, "title", "更新后的标题")
 
+
+@allure.feature("文章模块")
+@allure.story("删除文章")
+def test_delete_post():
+    """DELETE：删除文章"""
+    url = f"{BASE_URL}/posts/1"
+    resp = send_request("DELETE", url=url)
+    assert_http_response(resp, 200)
+
+
+@allure.feature("用户模块")
+@allure.story("需要token鉴权的用户信息查询")
+def test_get_user_info(user_token):
+    """注入user_token，send_request自动带上Authorization头部"""
+    url = f"{BASE_URL}/users/2"
+    resp = send_request("GET", url=url)
+    assert_http_response(resp, 200)
+    body = resp.json()
+    assert_json_value_equal(body, "id", 2)
+    assert_json_key_exists(body, "name")

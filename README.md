@@ -4,11 +4,11 @@
 
 ## ✨ 项目亮点
 
-- 封装公共请求方法，统一管理接口请求逻辑
-- Pytest 管理测试用例，支持参数化、异常场景断言
-- 集成 Allure 可视化测试报告，按模块分类展示
-- **Allure Trend 趋势图监控多轮回归通过率变化**，支持质量波动追踪
-- 可扩展接入 CI/CD 流水线（Jenkins / GitHub Actions）实现持续回归
+- ✅ 统一HTTP请求封装，集成tenacity自动重试，提升外部接口稳定性
+- ✅ 工程化分层：用例层、公共工具层、配置数据层分离
+- ✅ YAML管理测试数据，实现代码与数据解耦
+- ✅ Allure可视化报告：支持环境信息、业务模块(Feature/Story)、执行趋势图
+- ✅ 接入GitHub Actions CI，支持每次提交自动执行测试
 
 ## 🛠️ 技术栈
 
@@ -21,21 +21,22 @@
 
 ## 📂 项目结构
 
-reqres_api_test/
-├── assets/                  # 报告截图
-│   ├── allure_pass_100.png  # 全量通过报告
-│   └── allure_trend_fail.png # Trend 趋势对比图
-├── conftest.py              # pytest 公共配置
-├── pytest.ini               # pytest 配置文件
-├── requirements.txt         # 依赖包清单
-└── test_api_demo.py         # 接口自动化测试用例
+reqres-api-pytest-allure/
+├── assets/              # 报告截图（README 展示用）
+├── cases/               # 业务测试用例
+├── common/              # 公共工具：请求封装、日志、yaml 读取
+├── config/              # 测试数据 yaml
+├── .github/workflows/   # GitHub Actions CI 配置
+├── pytest.ini           # pytest 全局配置
+├── requirements.txt     # 依赖清单
+└── README.md
 
 
 ## ▶️ 本地运行
 
 ### 1. 克隆项目
 ```bash
-git clone https://github.com/你的用户名/reqres-api-pytest-allure.git
+git clone https://github.com/StillStream-ink/reqres-api-pytest-allure.git
 cd reqres-api-pytest-allure
 ```
 
@@ -55,19 +56,16 @@ allure serve allure-results
 ```
 
 ## 📊 效果预览
-
 ### 全量回归通过（100% Passed）
-![Allure全量通过](./assets/allure_pass_100.png)
+![Allure全量通过](./assets/allure_overview_100pass.png)
 
 ### 多轮回归 Trend 趋势监控
 ![Allure Trend趋势图](./assets/allure_trend_fail.png)
 > 前两轮全量通过，第三轮构造异常场景模拟缺陷，直观展示接口迭代质量波动
 
 
-## 📌 测试范围
-
+## 🎯 测试范围
 ReqRes 文章模块接口：
-
 - GET 获取文章列表
 - GET 获取单篇文章
 - POST 新增文章
@@ -75,11 +73,10 @@ ReqRes 文章模块接口：
 - DELETE 删除文章
 - 参数化查询不同文章 ID
 
-断言校验：HTTP 状态码、返回数据类型、关键字段存在性、数据长度
+断言校验：HTTP 状态码、返回数据类型、关键字段存在性、数据长度校验
 
 ## 💡 拓展方向
-
-- 接入 GitHub Actions / Jenkins，提交代码自动执行回归
-- 设置通过率质量门禁，不达标阻断发布
-- 增加数据库校验、接口关联场景
-- 集成失败用例自动重跑机制
+- 已接入 GitHub Actions 实现提交自动回归
+- 可新增通过率质量门禁，不达标阻断发布
+- 增加数据库校验、完整业务链路场景
+- 已实现失败用例自动重跑机制

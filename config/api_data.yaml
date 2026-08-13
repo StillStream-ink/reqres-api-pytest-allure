@@ -1,0 +1,31 @@
+# 文章模块接口数据驱动
+posts_list:
+  url: "/posts"
+  method: "GET"
+  expect_code: 200
+
+posts_detail:
+  url: "/posts/{post_id}"
+  method: "GET"
+  expect_code: 200
+
+posts_create:
+  url: "/posts"
+  method: "POST"
+  json:
+    title: "yaml数据驱动新增"
+    body: "数据和脚本分离，YAML管理测试数据"
+    userId: 1
+  expect_code: 201
+
+posts_update:
+  url: "/posts/{post_id}"
+  method: "PUT"
+  json:
+    title: "YAML更新后的标题"
+  expect_code: 200
+
+posts_delete:
+  url: "/posts/{post_id}"
+  method: "DELETE"
+  expect_code: 200

@@ -1,14 +1,19 @@
 import yaml
+import re
 
 def read_yaml(file_path):
+    """读取yaml文件"""
+    with open(file_path, encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+def replace_placeholder(text, data):
     """
-    读取yaml文件，返回字典
-    :param file_path: yaml文件路径
-    :return: dict
+    占位符替换：把 {post_id} 替换成实际值
     """
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
-        return data
-    except Exception as e:
-        raise FileNotFoundError(f"读取yaml失败：{e}")
+    if not isinstance(text, str):
+        return text
+    pattern = re.compile(r"\{(\w+)\}")
+    def repl(match):
+        key = match.group(1)
+        return str(data.get(key, ""))
+    return pattern.sub(repl, text)

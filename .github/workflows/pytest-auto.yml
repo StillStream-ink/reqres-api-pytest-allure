@@ -52,3 +52,10 @@ jobs:
           name: allure-report
           path: allure-report
           retention-days: 30
+          
+      - name: 执行pytest自动化用例，生成allure结果
+        run: pytest test_api_demo.py -v --alluredir=allure-results
+
+      # ========== 新增下面这一行：质量门禁校验 ==========
+      - name: 质量门禁-校验用例通过率
+        run: python common/quality_gate.py
