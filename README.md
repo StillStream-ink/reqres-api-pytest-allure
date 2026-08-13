@@ -26,7 +26,7 @@
 | GitHub Actions | CI 流水线，提交自动执行回归 |
 
 ## 📂 项目结构
-
+```text
 reqres-api-pytest-allure/
 ├── assets/              # 报告截图（README 展示用）
 ├── cases/               # 业务用例目录
@@ -42,7 +42,7 @@ reqres-api-pytest-allure/
 ├── test_api_demo.py     # 基础demo用例
 ├── test_user_flow.py    # 用户业务链路用例
 └── README.md
-
+```
 
 
 ## ▶️ 本地运行
