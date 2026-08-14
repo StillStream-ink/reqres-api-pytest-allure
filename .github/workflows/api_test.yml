@@ -22,8 +22,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 执行pytest自动化，收集Allure结果
-        run: pytest test_api_data_driven.py -v --alluredir=allure-results
+      - name: 执行pytest自动化，收集Allure结果（带质量门禁）
+        run: pytest test_api_data_driven.py -v --alluredir=allure-results --fail-under=90
 
       - name: 归档Allure原始结果
         uses: actions/upload-artifact@v4
