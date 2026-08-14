@@ -95,4 +95,11 @@ post_flow_delete:
   url: /posts/{flow_post_id}
   expect_code: 200
 
+# ===================== MySQL数据库配置（新增） =====================
+db:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  pwd: ""
+  db: "api_test_db"
 

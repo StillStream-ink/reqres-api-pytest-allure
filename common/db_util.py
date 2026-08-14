@@ -1,6 +1,8 @@
-# common/db_util.py
 import pymysql
 from pymysql.cursors import DictCursor
+from common.log_util import logger
+
+import pymysql
 
 class DBUtil:
     def __init__(self, host, user, password, database, port=3306):
@@ -10,20 +12,15 @@ class DBUtil:
             password=password,
             database=database,
             port=port,
-            charset="utf8mb4"
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor  # 返回字典，方便断言取值
         )
-        self.cursor = self.conn.cursor(DictCursor)
+        self.cursor = self.conn.cursor()
 
-    def query(self, sql, params=None):
-        """查询单条/多条，返回字典列表"""
-        self.cursor.execute(sql, params)
-        return self.cursor.fetchall()
-
-    def execute(self, sql, params=None):
-        """增删改"""
-        row = self.cursor.execute(sql, params)
-        self.conn.commit()
-        return row
+    def query_one(self, sql):
+        """查询单条记录"""
+        self.cursor.execute(sql)
+        return self.cursor.fetchone()
 
     def close(self):
         self.cursor.close()
