@@ -23,7 +23,7 @@ jobs:
           pip install requests pytest allure-pytest pyyaml
 
       - name: 执行pytest，生成allure结果数据
-        run: pytest test_api_demo.py -vs --alluredir=allure-results
+        run: pytest test_api_demo.py -v --alluredir=allure-results
 
       - name: 上传allure原始结果（工件保存）
         uses: actions/upload-artifact@v4
