@@ -38,6 +38,7 @@ def check_pass_rate(allure_json_dir="allure-results", threshold=90):
             skipped += 1
 
     # 有效用例 = 总数 - 跳过（跳过的不参与通过率计算）
+    # 关键：跳过用例不计入分母，防止"跳过失败用例来凑通过率"
     effective_total = total - skipped
     rate = passed / effective_total * 100 if effective_total > 0 else 0
 

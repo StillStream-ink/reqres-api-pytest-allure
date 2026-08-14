@@ -3,6 +3,8 @@ import sqlite3
 import os
 
 app = Flask(__name__)
+# 关键：通过 __file__ 动态计算，确保无论文件在哪层目录都能找到数据库
+# common/mock_server.py → common/ → 项目根目录
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'test_mock.db')
 
 def get_db():
