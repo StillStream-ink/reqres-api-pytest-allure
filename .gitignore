@@ -1,10 +1,24 @@
+# 虚拟环境
 .venv/
 venv/
+
+# pytest缓存
 .pytest_cache/
+
+# Python编译缓存
 __pycache__/
+*.pyc
+
+# Allure测试报告产物
 allure-results/
 allure-report/
-*.pyc
+
+# pytest-html单文件报告
+report.html
+
+# IDE本地配置
 .vscode/
 .idea/
-report.html
+
+# 自定义reports输出目录（你项目里有reports文件夹，加上）
+reports/
