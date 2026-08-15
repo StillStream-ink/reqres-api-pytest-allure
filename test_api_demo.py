@@ -73,6 +73,10 @@ def test_get_post_param(post_id):
         assert resp.json()["id"] == post_id
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b8cf692 (ci: add quality gate and github actions workflow)
 @allure.feature("文章模块")
 @allure.story("新增文章")
 def test_create_post():
@@ -93,7 +97,7 @@ def test_create_post():
         assert resp.json()["title"] == json_body["title"]
         assert "id" in resp.json()
 
-
+@pytest.mark.xfail(reason="jsonplaceholder不持久化POST新增资源，CI环境会404，本地会话内正常")
 @allure.feature("文章模块")
 @allure.story("修改文章")
 def test_update_post(new_post_id):
