@@ -1,61 +1,38 @@
-name: CI
+name: 质量门禁-校验用例通过率
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [main]
 
 jobs:
-  api-test:
+  test:
     runs-on: ubuntu-latest
     
     steps:
-      - name: 检出代码
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 设置 Python 3.11
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      - name: 设置 Java 17（Allure依赖Java）
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: 安装 Allure 命令行
-        run: |
-          wget https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
-          tar -zxvf allure-2.27.0.tgz
-          sudo mv allure-2.27.0 /opt/allure
-          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
-          allure --version
-
-      - name: 安装依赖
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pytest requests allure-pytest pyyaml flask tenacity
 
-      - name: 执行接口自动化测试
-        run: pytest test_api_demo.py -v --alluredir=allure-results
-        continue-on-error: true
+      - name: Run tests with Allure
+        run: pytest test_api_demo.py -v --alluredir=./allure-results
 
-      - name: 生成 Allure 报告
-        run: allure generate allure-results -o allure-report --clean
+      - name: Quality Gate
+        run: python common/quality_gate.py
 
-      - name: 上传 Allure 报告
+      - name: Upload Allure results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: allure-report
-          retention-days: 30
-          
-      - name: 执行pytest自动化用例，生成allure结果
-        run: pytest test_api_demo.py -v --alluredir=allure-results
-
-      # ========== 新增下面这一行：质量门禁校验 ==========
-      - name: 质量门禁-校验用例通过率
-        run: python common/quality_gate.py
+          name: allure-results
+          path: allure-results
