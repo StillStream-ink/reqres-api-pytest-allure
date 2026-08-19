@@ -25,7 +25,10 @@ jobs:
           pip install pytest requests allure-pytest pyyaml flask tenacity
 
       - name: Run tests with Allure
-        run: pytest test_api_demo.py -v --alluredir=./allure-results
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          mkdir -p allure-results
+          pytest test_api_demo.py -v --alluredir=./allure-results
 
       - name: Quality Gate
         run: python common/quality_gate.py
