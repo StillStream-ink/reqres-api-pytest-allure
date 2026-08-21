@@ -4,16 +4,29 @@ import allure
 from common.yaml_util import read_yaml
 from common.log_util import logger
 from common.http_util import send_request
+from common.config_util import ENV_CONFIG
 import os
 
-# 读取yaml测试数据
+# 从环境配置读取 base_url，不再硬编码
+BASE_URL = ENV_CONFIG["base_url"]
+TIMEOUT = ENV_CONFIG["timeout"]
+
+# 读取yaml测试数据（如有需要）
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 test_data = read_yaml(os.path.join(base_path, "config/test_data.yaml"))
 
-BASE_URL = "https://jsonplaceholder.typicode.com"
+# 修复：update_body 直接内联定义，不依赖 YAML 中不存在的 post 键
+UPDATE_BODY = {
+    "title": "链路测试-更新后的标题",
+    "body": "链路测试-更新后的内容",
+    "userId": 1
+}
 
-# 直接使用已存在postId=1，规避404问题
-post_id_fixture = 1
+USER_UPDATE_BODY = {
+    "name": "更新后的用户名",
+    "username": "updated_user",
+    "email": "updated@test.com"
+}
 
 
 @allure.feature("帖子模块")
@@ -21,39 +34,56 @@ post_id_fixture = 1
 @pytest.mark.smoke
 def test_post_full_flow():
     """
-    完整业务链路：查询帖子 → 更新帖子 → 删除帖子
+    完整业务链路：创建帖子 → 查询帖子 → 更新帖子 → 删除帖子
+    修复：动态创建帖子，不依赖固定ID，避免数据污染
     """
-    post_id = post_id_fixture
-    update_body = test_data["post"]["update_info"]
+    # 步骤0：创建新帖子（避免删固定ID影响其他用例）
+    logger.info("【步骤0】创建测试帖子")
+    create_resp = requests.post(
+        f"{BASE_URL}/posts",
+        json={"title": "链路测试-原始标题", "body": "链路测试原始内容", "userId": 1},
+        timeout=TIMEOUT
+    )
+    assert create_resp.status_code == 201
+    post_id = create_resp.json()["id"]
+    logger.info(f"创建帖子成功，ID={post_id}")
 
-    # 步骤1：获取帖子详情
-    logger.info("【步骤1】获取帖子详情")
-    res_get = send_request("GET", f"{BASE_URL}/posts/{post_id}")
-    assert res_get is not None, "请求无响应，网络异常"
-    assert res_get.status_code == 200
-    data = res_get.json()
-    assert isinstance(data, dict), "接口返回不是json对象"
-    logger.info(f"查询帖子结果：{data}")
-    assert data["id"] == post_id
+    try:
+        # 步骤1：获取帖子详情
+        logger.info("【步骤1】获取帖子详情")
+        res_get = send_request("GET", f"{BASE_URL}/posts/{post_id}")
+        assert res_get is not None, "请求无响应，网络异常"
+        assert res_get.status_code == 200
+        data = res_get.json()
+        assert isinstance(data, dict), "接口返回不是json对象"
+        logger.info(f"查询帖子结果：{data}")
+        assert data["id"] == post_id
 
-    # 步骤2：更新帖子
-    logger.info("【步骤2】更新帖子")
-    res_put = send_request("PUT", f"{BASE_URL}/posts/{post_id}", json_data=update_body)
-    assert res_put is not None, "请求无响应，网络异常"
-    assert res_put.status_code == 200
-    data_put = res_put.json()
-    assert isinstance(data_put, dict), "接口返回不是json对象"
-    logger.info(f"更新帖子结果：{data_put}")
-    assert data_put["title"] == update_body["title"]
+        # 步骤2：更新帖子
+        logger.info("【步骤2】更新帖子")
+        res_put = send_request("PUT", f"{BASE_URL}/posts/{post_id}", json_data=UPDATE_BODY)
+        assert res_put is not None, "请求无响应，网络异常"
+        assert res_put.status_code == 200
+        data_put = res_put.json()
+        assert isinstance(data_put, dict), "接口返回不是json对象"
+        logger.info(f"更新帖子结果：{data_put}")
+        assert data_put["title"] == UPDATE_BODY["title"]
 
-    # 步骤3：删除帖子
-    logger.info("【步骤3】删除帖子")
-    res_del = send_request("DELETE", f"{BASE_URL}/posts/{post_id}")
-    assert res_del is not None, "请求无响应，网络异常"
-    assert res_del.status_code == 200
-    data_del = res_del.json()
-    assert isinstance(data_del, dict), "接口返回不是json对象"
-    logger.info(f"删除帖子结果：{data_del}")
+        # 步骤3：删除帖子
+        logger.info("【步骤3】删除帖子")
+        res_del = send_request("DELETE", f"{BASE_URL}/posts/{post_id}")
+        assert res_del is not None, "请求无响应，网络异常"
+        assert res_del.status_code == 200
+        data_del = res_del.json()
+        assert isinstance(data_del, dict), "接口返回不是json对象"
+        logger.info(f"删除帖子结果：{data_del}")
+    finally:
+        # 无论成败，尝试清理
+        try:
+            requests.delete(f"{BASE_URL}/posts/{post_id}", timeout=TIMEOUT)
+        except Exception:
+            pass
+
 
 @pytest.mark.skip(reason="公共reqres接口偶发超时，待优化重试")
 @allure.feature("用户模块")
@@ -64,7 +94,6 @@ def test_user_full_flow():
     用户业务链路：查询用户详情 → 修改用户信息
     """
     user_id = 1
-    user_update_data = test_data["user"]["update_info"]
 
     # 步骤1：查询用户详情
     logger.info("【用户步骤1】查询用户信息")
@@ -78,13 +107,13 @@ def test_user_full_flow():
 
     # 步骤2：更新用户信息
     logger.info("【用户步骤2】更新用户信息")
-    res_put = send_request("PUT", f"{BASE_URL}/users/{user_id}", json_data=user_update_data)
+    res_put = send_request("PUT", f"{BASE_URL}/users/{user_id}", json_data=USER_UPDATE_BODY)
     assert res_put is not None, "请求无响应，网络异常"
     assert res_put.status_code == 200
     data_put = res_put.json()
     assert isinstance(data_put, dict), "接口返回不是json对象"
     logger.info(f"更新后用户：{data_put}")
-    assert data_put["name"] == user_update_data["name"]
+    assert data_put["name"] == USER_UPDATE_BODY["name"]
 
 
 @allure.feature("帖子模块")
@@ -113,11 +142,22 @@ def test_user_invalid_id():
 @allure.story("空数据提交测试")
 def test_post_put_empty_body():
     """异常场景：put更新传入空json，校验接口兼容"""
+    # 先创建一篇文章，避免修改预置数据
+    create_resp = requests.post(
+        f"{BASE_URL}/posts",
+        json={"title": "空数据测试", "body": "test", "userId": 1},
+        timeout=TIMEOUT
+    )
+    post_id = create_resp.json()["id"]
+
     logger.info("【异常用例】帖子更新传入空body")
-    res = send_request("PUT", f"{BASE_URL}/posts/1", json_data={})
+    res = send_request("PUT", f"{BASE_URL}/posts/{post_id}", json_data={})
     logger.info(f"空body更新响应：{res.json()}")
-    # mock接口不会校验空数据，这里只断言服务正常返回200
     assert res.status_code == 200
+
+    # 清理
+    requests.delete(f"{BASE_URL}/posts/{post_id}", timeout=TIMEOUT)
+
 
 @pytest.mark.skip(reason="jsonplaceholder公网接口偶发超时，内网环境再启用")
 @allure.feature("帖子模块")
@@ -135,7 +175,6 @@ def test_post_param_invalid_id(post_id, expect_code):
     assert res is not None, "请求无响应，网络异常"
     logger.info(f"实际状态码：{res.status_code}")
     assert res.status_code == expect_code
-
 
 
 @allure.feature("用户模块")

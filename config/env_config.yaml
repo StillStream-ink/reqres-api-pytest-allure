@@ -1,0 +1,28 @@
+# 多环境配置，通过环境变量 API_ENV 切换
+current: dev
+
+environments:
+  dev:
+    base_url: "http://127.0.0.1:5000"
+    timeout: 10
+    db_name: "test_mock.db"
+    db_host: "127.0.0.1"
+    db_port: 3307
+    db_user: "root"
+    db_password: "Toward123456"
+    db_database: "my_test_db"
+
+  test:
+    base_url: "http://192.168.1.100:8080"
+    timeout: 15
+    db_name: "test.db"
+
+  prod:
+    base_url: "https://api.example.com"
+    timeout: 30
+    db_name: "prod.db"
+
+  docker:
+    base_url: "http://mock:5000"
+    timeout: 15
+    db_name: "reqres_test"

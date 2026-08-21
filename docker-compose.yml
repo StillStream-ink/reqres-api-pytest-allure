@@ -1,0 +1,56 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: reqres_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: reqres_test
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
+  mock:
+    build: .
+    container_name: reqres_mock
+    ports:
+      - "5000:5000"
+    environment:
+      - API_ENV=docker
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpass
+      - MYSQL_DB=reqres_test
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  test:
+    build: .
+    container_name: reqres_test
+    depends_on:
+      - mock
+    environment:
+      - API_ENV=docker
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpass
+      - MYSQL_DB=reqres_test
+    command: >
+      sh -c "sleep 10 && pytest -v cases/test_mysql_demo.py --alluredir=allure-results"
+    volumes:
+      - ./allure-results:/app/allure-results
+
+volumes:
+  mysql_data:

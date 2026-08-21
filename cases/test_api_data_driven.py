@@ -1,11 +1,15 @@
 import pytest
 import allure
+import requests
 import os
+import copy
 from common.yaml_util import read_yaml, replace_placeholder
 from common.assert_util import *
+from common.config_util import ENV_CONFIG
 
-BASE_URL = "https://jsonplaceholder.typicode.com"
-base_path = os.path.dirname(os.path.abspath(__file__))
+BASE_URL = ENV_CONFIG["base_url"]
+TIMEOUT = ENV_CONFIG["timeout"]
+base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 yaml_data = read_yaml(os.path.join(base_path, "config/test_data.yaml"))
 
 # 单独封装统一执行函数
@@ -18,28 +22,23 @@ def run_api_case(case_info, replace_data=None):
     json_data = case_info.get("json")
     expect_code = case_info["expect_code"]
 
-    from test_api_demo import send_request
-    resp = send_request(method=method, url=full_url, json_data=json_data)
+    resp = requests.request(method=method, url=full_url, json=json_data, timeout=TIMEOUT)
     assert_http_response(resp, expect_code)
     body = resp.json()
 
     # 执行校验规则
     check_rule = case_info.get("check", {})
-    # 判断是否是列表
     if check_rule.get("is_list") is True:
         assert isinstance(body, list), "❌ 返回不是数组"
         if check_rule.get("has_keys") and len(body) > 0:
             for k in check_rule["has_keys"]:
                 assert_json_key_exists(body[0], k)
-    # 等值断言
     if check_rule.get("equal"):
         for k,v in check_rule["equal"].items():
             real_v = replace_placeholder(v, replace_data)
-            # 修复点：先判断是不是字符串，再isdigit
             if isinstance(real_v, str) and real_v.isdigit():
                 real_v = int(real_v)
             assert_json_value_equal(body, k, real_v)
-    # 类型断言
     if check_rule.get("type"):
         type_map = {"str": str, "int": int}
         for k,t in check_rule["type"].items():
@@ -76,27 +75,63 @@ def test_post_update():
 @allure.feature("文章模块")
 @allure.story("删除文章")
 def test_post_delete():
-    run_api_case(yaml_data["post_delete"])
+    # 修复：先创建新文章，再删除新文章，避免删除预置数据
+    create_resp = requests.post(
+        f"{BASE_URL}/posts",
+        json={"title": "删除测试文章", "body": "待删除", "userId": 1},
+        timeout=TIMEOUT
+    )
+    assert create_resp.status_code == 201
+    post_id = create_resp.json()["id"]
+
+    case_info = copy.deepcopy(yaml_data["post_delete"])
+    # 替换 url 中的 post_id
+    case_info["url"] = case_info["url"].replace("1", str(post_id)).replace("{post_id}", str(post_id))
+    run_api_case(case_info)
 
 @allure.feature("用户模块")
 @allure.story("用户信息查询（带token鉴权）")
 def test_user_info(user_token):
     run_api_case(yaml_data["user_info"])
-    
+
 # -------------------- 业务链路：文章全生命周期（串行依赖）--------------------
-@allure.feature("文章模块")
-@allure.story("文章完整业务链路：新增→查询→修改→删除")
 @pytest.fixture(scope="class")
 def flow_post_id():
-    """直接使用服务自带存在的文章id=1（jsonplaceholder不会持久化新建数据）"""
-    return 1
+    """创建一篇新文章供链路测试使用，测试结束后自动清理"""
+    resp = requests.post(
+        f"{BASE_URL}/posts",
+        json={"title": "链路测试文章", "body": "flow测试", "userId": 1},
+        timeout=TIMEOUT
+    )
+    assert resp.status_code == 201
+    post_id = resp.json()["id"]
+    yield post_id
+    try:
+        requests.delete(f"{BASE_URL}/posts/{post_id}", timeout=TIMEOUT)
+    except Exception:
+        pass
 
 
+@allure.feature("文章模块")
+@allure.story("文章完整业务链路-查询")
 def test_flow_get(flow_post_id):
-    run_api_case(yaml_data["post_flow_get"], replace_data={"flow_post_id": flow_post_id})
+    case_info = copy.deepcopy(yaml_data["post_flow_get"])
+    if "check" in case_info and "equal" in case_info["check"]:
+        case_info["check"]["equal"]["id"] = str(flow_post_id)
+    run_api_case(case_info, replace_data={"flow_post_id": flow_post_id})
 
+@allure.feature("文章模块")
+@allure.story("文章完整业务链路-修改")
 def test_flow_update(flow_post_id):
-    run_api_case(yaml_data["post_flow_update"], replace_data={"flow_post_id": flow_post_id})
+    case_info = copy.deepcopy(yaml_data["post_flow_update"])
+    if "check" in case_info and "equal" in case_info["check"]:
+        case_info["check"]["equal"]["id"] = str(flow_post_id)
+    run_api_case(case_info, replace_data={"flow_post_id": flow_post_id})
 
+@allure.feature("文章模块")
+@allure.story("文章完整业务链路-删除")
 def test_flow_delete(flow_post_id):
-    run_api_case(yaml_data["post_flow_delete"], replace_data={"flow_post_id": flow_post_id})
+    case_info = copy.deepcopy(yaml_data["post_flow_delete"])
+    if "check" in case_info and "equal" in case_info["check"]:
+        case_info["check"]["equal"]["id"] = str(flow_post_id)
+    run_api_case(case_info, replace_data={"flow_post_id": flow_post_id})
