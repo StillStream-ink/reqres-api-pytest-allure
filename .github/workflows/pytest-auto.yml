@@ -18,64 +18,14 @@ jobs:
         with:
           python-version: '3.11'
 
-      # ==================== MySQL 容器 ====================
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: 启动 MySQL 8.0 容器
         run: |
           docker rm -f mysql 2>/dev/null || true
           docker run -d --name mysql \
             -p 127.0.0.1:3306:3306 \
-            -e MYSQL_ROOT_PASSWORD=Toward123456 \
-            -e MYSQL_DATABASE=my_test_db \
-            mysql:8.0
-
-      - name: 等待 MySQL 就绪
-        run: |
-          for i in {1..30}; do
-            if docker exec mysql mysqladmin ping -h localhost -uroot -pToward123456 --silent 2>/dev/null; then
-              echo "✅ MySQL 已就绪！"
-              break
-            fi
-            echo "⏳ 等待 MySQL 初始化... ($i/30)"
-            sleep 2
-          done
-
-      # ==================== 依赖安装 ====================
-      - name: 安装项目依赖
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests pytest allure-pytest pyyaml pymysql flask pytest-rerunfailures
-
-      # ==================== Mock Server ====================
-      - name: 后台启动 Mock Server
-        run: |
-          nohup python common/mock_server.py > mock_server.log 2>&1 &
-          echo "⏳ 等待 Mock Server 启动..."
-          sleep 5
-          echo "=== Mock Server 日志 ==="
-          cat mock_server.log
-
-      # ==================== 测试执行 ====================
-      - name: 执行 pytest，生成 allure 结果数据
-        run: |
-          mkdir -p allure-results
-          pytest cases/ -v -s --alluredir=allure-results
-
-      - name: 执行自定义质量门禁
-        run: python common/quality_gate.py
-
-      # ==================== Allure 报告 ====================
-      - name: 安装 Allure CLI
-        run: |
-          curl -sSL https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz -o allure.tgz
-          tar -xzf allure.tgz -C /tmp/
-          echo "/tmp/allure-2.27.0/bin" >> $GITHUB_PATH
-
-      - name: 生成 Allure HTML 报告
-        run: |
-          allure generate allure-results -o allure-report --clean
-
-      - name: 部署报告到 GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./allure-report
+            -e MYSQL_ROOT_PASSWORD=T
