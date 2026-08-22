@@ -31,8 +31,8 @@ jobs:
 
       - name: Create allure-results directory
         run: |
+          sudo rm -rf allure-results
           mkdir -p allure-results
-          chmod 777 allure-results
           
       - name: Run tests with Allure
         run: |
