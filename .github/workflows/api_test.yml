@@ -22,6 +22,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pytest allure-pytest pyyaml pymysql
 
+      - name: 安装 Allure 命令行工具
+        run: npm install -g allure-commandline
+
       - name: 执行pytest，生成allure结果数据
         run: |
           mkdir -p allure-results
@@ -30,11 +33,12 @@ jobs:
       - name: 执行自定义质量门禁
         run: python common/quality_gate.py
 
-      - name: 部署 Allure 报告到 Pages
-        uses: simple-elf/allure-report-action@master
-        if: always()
+      - name: 生成 Allure 报告
+        run: allure generate allure-results -o allure-report --clean
+
+      - name: 部署 Allure 报告到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          gh_pages: gh-pages
-          allure_results: allure-results
-          allure_report: allure-report
-          keep_reports: 10
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          destination_dir: api-test-report
