@@ -7,7 +7,7 @@ on:
 
 jobs:
   test-job:
-    runs-on: windows‑latest
+    runs-on: windows-latest
     steps:
       - name: 拉取仓库代码
         uses: actions/checkout@v4
@@ -24,14 +24,17 @@ jobs:
 
       - name: 执行pytest，生成allure结果数据
         run: |
-          mkdir -p .pytest-results
-          pytest test_api_demo.py -v --alluredir=allure-results --json-report --json-report-file=.pytest-results/report.json
+          mkdir -p allure-results
+          pytest test_api_demo.py -v --alluredir=allure-results
 
       - name: 执行自定义质量门禁
         run: python common/quality_gate.py
 
-      - name: 上传allure原始结果（工件保存）
-        uses: actions/upload-artifact@v4
+      - name: 部署 Allure 报告到 Pages
+        uses: simple-elf/allure-report-action@master
+        if: always()
         with:
-          name: allure‑raw‑data
-          path: allure-results
+          gh_pages: gh-pages
+          allure_results: allure-results
+          allure_report: allure-report
+          keep_reports: 10
