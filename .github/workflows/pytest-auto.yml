@@ -15,7 +15,7 @@ jobs:
   test-and-report:
     runs-on: ubuntu-latest
 
-    # 👇 这是关键：用 services 让 GitHub 官方帮你管理 MySQL
+    # 1. 使用 GitHub 官方 services 托管 MySQL，网络最稳定
     services:
       mysql:
         image: mysql:8.0
@@ -24,11 +24,13 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: Toward123456
           MYSQL_DATABASE: my_test_db
+        # 2. 适配 MySQL 8.0/8.4 最新版的认证插件开启方式
         options: >-
           --health-cmd "mysqladmin ping -h 127.0.0.1 -uroot -pToward123456"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        command: --mysql-native-password=ON
 
     steps:
       - name: 1. 检出代码
@@ -44,28 +46,45 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 4. 运行 pytest 生成 Allure 结果
+      # 3. 增加一步：物理探测 3306 端口是否真的通了
+      - name: 4. 探测 MySQL 端口连通性
+        run: |
+          echo "正在探测 127.0.0.1:3306 ..."
+          for i in {1..10}; do
+            if nc -zv 127.0.0.1 3306 2>/dev/null; then
+              echo "3306 端口已监听，MySQL 网络打通！"
+              exit 0
+            fi
+            echo "等待端口监听... ($i/10)"
+            sleep 2
+          done
+          echo "端口探测失败，打印 MySQL 容器日志："
+          docker ps -a
+          docker logs $(docker ps -aq --filter ancestor=mysql:8.0)
+          exit 1
+
+      - name: 5. 运行 pytest 生成 Allure 结果
         run: |
           mkdir -p allure-results
           pytest --alluredir=allure-results --clean-alluredir
 
-      - name: 5. 安装 Java 17（Allure 依赖）
+      - name: 6. 安装 Java (Allure 依赖)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 6. 下载并安装 Allure CLI
+      - name: 7. 下载并配置 Allure CLI
         run: |
           wget -q https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
           tar -zxvf allure-2.27.0.tgz -C /opt/
           echo "/opt/allure-2.27.0/bin" >> $GITHUB_PATH
 
-      - name: 7. 生成 Allure HTML 报告
+      - name: 8. 生成 Allure HTML 报告
         run: |
           allure generate allure-results -o allure-report --clean
 
-      - name: 8. 部署报告到 GitHub Pages
+      - name: 9. 部署报告到 GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: allure-report
