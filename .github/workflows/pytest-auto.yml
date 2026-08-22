@@ -30,6 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: 0. 强制清理环境
+        run: |
+          docker rm -f mysql 2>/dev/null || true
+          docker system prune -f
+          sudo rm -rf allure-results allure-report
+          echo "环境已重置"
+
       - name: 4. MySQL 8.0 容器
         run: |
           docker rm -f mysql 2>/dev/null || true
