@@ -1,9 +1,13 @@
 name: 质量门禁-校验用例通过率
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
+permissions:
+  contents: write
 
 jobs:
   test:
@@ -41,24 +45,26 @@ jobs:
       - name: 启动 Mock Server
         run: |
           python common/mock_server.py &
-          sleep 3
+          sleep 5
 
-      - name: 执行测试
+      - name: 运行 pytest 生成 Allure 结果
         run: |
           mkdir -p allure-results
-          pytest cases/ -s -q --alluredir=allure-results
+          pytest cases/ -v --alluredir=allure-results --reruns 1 --reruns-delay 1
+
+      - name: 安装 Allure CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y allure
 
       - name: 生成 Allure 报告
-        uses: simple-elf/allure-report-action@v1.7
-        if: always()
-        with:
-          allure_history: allure-history
-          keep_reports: 10
+        run: |
+          allure generate allure-results -o allure-report --clean
 
-      - name: 发布 Allure 报告
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
+      - name: 部署到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
           publish_branch: gh-pages
-          publish_dir: allure-history
+          force_orphan: true
