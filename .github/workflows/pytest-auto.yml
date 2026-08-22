@@ -26,8 +26,10 @@ jobs:
 
       - name: Start MySQL
         run: |
-          # 后台启动数据库容器
           docker compose up -d
+          sleep 10
+          docker ps -a
+          docker compose logs mysql
           
           # 主动探测 MySQL 端口 (3306) 是否真正开始监听
           echo "Waiting for MySQL to be ready..."
