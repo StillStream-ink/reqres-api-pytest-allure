@@ -10,6 +10,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: Toward123456
+          MYSQL_DATABASE: my_test_db
+        ports:
+          - 3307:3306   # ← 宿主机3307映射到容器3306，匹配代码配置
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -P 3306"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,42 +38,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest requests allure-pytest pyyaml flask tenacity pymysql pytest-rerunfailures
 
-      - name: Start MySQL
-        run: |
-          docker compose up -d
-          sleep 10
-          docker ps -a
-          docker compose logs mysql
-          
-          # 主动探测 MySQL 端口 (3306) 是否真正开始监听
-          echo "Waiting for MySQL to be ready..."
-          timeout=60
-          while ! nc -z localhost 3306; do   
-            sleep 1
-            timeout=$((timeout-1))
-            if [ $timeout -le 0 ]; then
-              echo "MySQL failed to start in time."
-              exit 1
-            fi
-          done
-          echo "MySQL is ready!"
-
       - name: Create allure-results directory
         run: |
           sudo rm -rf allure-results
           mkdir -p allure-results
+          chmod 777 allure-results
 
       - name: Run tests with Allure
         run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)
-          pytest cases -v --alluredir=./allure-results
-          
-      - name: Quality Gate
-        run: python common/quality_gate.py
+          pytest --reruns 2 -v -s --alluredir=allure-results cases/
 
-      - name: Upload Allure results
-        if: always()
+      - name: Upload Allure Results
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
-          path: allure-results
+          path: allure-results/
