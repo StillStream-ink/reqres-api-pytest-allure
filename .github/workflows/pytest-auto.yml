@@ -26,8 +26,8 @@ jobs:
 
       - name: Start MySQL
         run: |
-          docker-compose up -d
-          sleep 10
+          docker compose up -d
+          sleep 15
 
       - name: Run tests with Allure
         run: |
