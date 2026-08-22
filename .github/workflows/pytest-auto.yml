@@ -9,7 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    # 自动启动 MySQL 8.0 容器
     services:
       mysql:
         image: mysql:8.0
@@ -36,21 +35,33 @@ jobs:
       - name: 安装项目依赖
         run: |
           python -m pip install --upgrade pip
-          pip install requests pytest allure-pytest pyyaml pymysql
+          pip install requests pytest allure-pytest pyyaml pymysql flask
+
+      - name: 后台启动 mock server
+        run: |
+          nohup python common/mock_server.py > mock_server.log 2>&1 &
+          echo "等待 mock server 启动..."
+          sleep 3
+          curl -s http://127.0.0.1:5000/health || echo "mock server 启动中"
 
       - name: 执行 pytest，生成 allure 结果数据
         run: |
-          pytest cases/ -v -s --alluredir=allure-results
+          pytest cases/ --reruns 2 -v -s --alluredir=allure-results
 
       - name: 执行自定义质量门禁
         run: python common/quality_gate.py
 
-      # 部署 Allure 报告到 GitHub Pages
-      - name: 部署 Allure 报告到 Pages
-        uses: simple-elf/allure-report-action@master
+      - name: 生成 Allure 报告
         if: always()
+        run: |
+          pip install allure
+          allure generate allure-results -o allure-report --clean
+
+      - name: 部署 Allure 报告到 Pages
+        if: always()
+        uses: simple-elf/allure-report-action@master
         with:
           gh_pages: gh-pages
           allure_results: allure-results
           allure_report: allure-report
-          allure_history: allure-history
+          keep_history: true
