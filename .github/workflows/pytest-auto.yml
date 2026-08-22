@@ -8,7 +8,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
+    # 自动启动 MySQL 8.0 容器
     services:
       mysql:
         image: mysql:8.0
@@ -32,21 +33,19 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: 安装项目依赖
         run: |
           python -m pip install --upgrade pip
-          pip install pytest requests allure-pytest pyyaml flask tenacity pymysql pytest-rerunfailures
+          pip install requests pytest allure-pytest pyyaml pymysql
 
-      - name: Create allure-results directory
+      - name: 执行 pytest，生成 allure 结果数据
         run: |
-          sudo rm -rf allure-results
-          mkdir -p allure-results
-          chmod 777 allure-results
+          pytest cases/ -v -s --alluredir=allure-results
 
-      - name: Run tests with Allure
-        run: |
-          pytest --reruns 2 -v -s --alluredir=allure-results cases/
+      - name: 执行自定义质量门禁
+        run: python common/quality_gate.py
 
+      # 部署 Allure 报告到 GitHub Pages
       - name: 部署 Allure 报告到 Pages
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -54,4 +53,4 @@ jobs:
           gh_pages: gh-pages
           allure_results: allure-results
           allure_report: allure-report
-          keep_reports: 10
+          allure_history: allure-history
