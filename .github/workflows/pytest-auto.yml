@@ -30,8 +30,10 @@ jobs:
           sleep 15
 
       - name: Create allure-results directory
-        run: mkdir -p allure-results
-
+        run: |
+          mkdir -p allure-results
+          chmod 777 allure-results
+          
       - name: Run tests with Allure
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)
