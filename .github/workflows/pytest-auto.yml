@@ -26,6 +26,39 @@ jobs:
       - name: 启动 MySQL 8.0 容器
         run: |
           docker rm -f mysql 2>/dev/null || true
-          docker run -d --name mysql \
-            -p 127.0.0.1:3306:3306 \
-            -e MYSQL_ROOT_PASSWORD=T
+          docker run -d --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=Toward123456 -e MYSQL_DATABASE=my_test_db mysql:8.0
+
+      - name: 等待 MySQL 就绪
+        run: |
+          for i in $(seq 1 30); do
+            docker exec mysql mysqladmin ping -h 127.0.0.1 -uroot -pToward123456 --silent && echo "MySQL is ready!" && exit 0
+            echo "Waiting for MySQL... ($i/30)"
+            sleep 2
+          done
+          echo "MySQL failed to start"
+          exit 1
+
+      - name: 启动 Mock Server
+        run: |
+          python common/mock_server.py &
+          sleep 3
+
+      - name: 执行测试
+        run: |
+          mkdir -p allure-results
+          pytest cases/ -s -q --alluredir=allure-results
+
+      - name: 生成 Allure 报告
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          allure_history: allure-history
+          keep_reports: 10
+
+      - name: 发布 Allure 报告
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
