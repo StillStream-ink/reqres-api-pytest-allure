@@ -30,13 +30,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 4. 启动 MySQL 8.0 容器
+      - name: 4. MySQL 8.0 容器
         run: |
           docker rm -f mysql 2>/dev/null || true
-          docker run -d --name mysql -p 127.0.0.1:3306:3306 \
-            -e MYSQL_ROOT_PASSWORD=Toward123456 \
-            -e MYSQL_DATABASE=my_test_db \
-            mysql:8.0 --default-authentication-plugin=mysql_native_password
+          docker run -d --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=Toward123456 -e MYSQL_DATABASE=my_test_db mysql:8.0 --default-authentication-plugin=mysql_native_password
 
       - name: 5. 等待 MySQL 就绪
         run: |
