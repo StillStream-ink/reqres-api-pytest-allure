@@ -24,6 +24,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest requests allure-pytest pyyaml flask tenacity pymysql pytest-rerunfailures
 
+      - name: Start MySQL
+        run: |
+          docker-compose up -d
+          sleep 10
+
       - name: Run tests with Allure
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)
