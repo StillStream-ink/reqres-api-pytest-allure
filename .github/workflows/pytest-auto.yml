@@ -29,12 +29,14 @@ jobs:
           docker compose up -d
           sleep 15
 
+      - name: Create allure-results directory
+        run: mkdir -p allure-results
+
       - name: Run tests with Allure
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)
-          mkdir -p allure-results
           pytest cases -v --alluredir=./allure-results
-
+          
       - name: Quality Gate
         run: python common/quality_gate.py
 
