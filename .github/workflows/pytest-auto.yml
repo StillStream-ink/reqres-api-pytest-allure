@@ -17,6 +17,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: 0. 强制清理环境
+        run: |
+          docker rm -f mysql 2>/dev/null || true
+          docker system prune -f
+          sudo rm -rf allure-results allure-report
+
       - name: 1. 检出代码
         uses: actions/checkout@v4
 
@@ -30,28 +36,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 0. 强制清理环境
+      - name: 4. 启动 MySQL 8.0 容器
         run: |
           docker rm -f mysql 2>/dev/null || true
-          docker system prune -f
-          sudo rm -rf allure-results allure-report
-          echo "环境已重置"
-
-      - name: 4. MySQL 8.0 容器
-        run: |
-          docker rm -f mysql 2>/dev/null || true
-          docker run -d --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD=Toward123456 -e MYSQL_DATABASE=my_test_db mysql:8.0 --default-authentication-plugin=mysql_native_password
+          docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=Toward123456 -e MYSQL_DATABASE=my_test_db mysql:8.0 --default-authentication-plugin=mysql_native_password
 
       - name: 5. 等待 MySQL 就绪
         run: |
-          for i in $(seq 1 30); do
-            if docker exec mysql mysqladmin ping -h 127.0.0.1 -uroot -pToward123456 --silent; then
+          for i in $(seq 1 45); do
+            if docker exec mysql mysqladmin ping -h 127.0.0.1 -uroot -pToward123456 --silent 2>/dev/null; then
               echo "MySQL is ready!"
               exit 0
             fi
-            echo "Waiting for MySQL... ($i/30)"
-            sleep 2
+            echo "Waiting for MySQL... ($i/45)"
+            sleep 3
           done
+          docker logs mysql
           echo "MySQL failed to start" && exit 1
 
       - name: 6. 运行 pytest 生成 Allure 结果
