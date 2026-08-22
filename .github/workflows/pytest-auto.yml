@@ -26,14 +26,27 @@ jobs:
 
       - name: Start MySQL
         run: |
+          # 后台启动数据库容器
           docker compose up -d
-          sleep 15
+          
+          # 主动探测 MySQL 端口 (3306) 是否真正开始监听
+          echo "Waiting for MySQL to be ready..."
+          timeout=60
+          while ! nc -z localhost 3306; do   
+            sleep 1
+            timeout=$((timeout-1))
+            if [ $timeout -le 0 ]; then
+              echo "MySQL failed to start in time."
+              exit 1
+            fi
+          done
+          echo "MySQL is ready!"
 
       - name: Create allure-results directory
         run: |
           sudo rm -rf allure-results
           mkdir -p allure-results
-          
+
       - name: Run tests with Allure
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)
