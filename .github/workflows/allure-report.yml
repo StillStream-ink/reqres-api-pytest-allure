@@ -17,8 +17,8 @@ jobs:
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           run_id: ${{ github.event.workflow_run.id }}
-          name: allure-report
-          path: allure-report
+          name: allure-results
+          path: allure-results
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
