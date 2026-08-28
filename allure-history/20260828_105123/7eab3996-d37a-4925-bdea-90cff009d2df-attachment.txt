@@ -1,0 +1,4 @@
+2026-08-27 21:46:57,666 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_create_order ==========
+2026-08-27 21:46:57,705 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_order ==========
+

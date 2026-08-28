@@ -1,0 +1,2 @@
+2026-08-26 21:53:04,385 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_product ==========
+

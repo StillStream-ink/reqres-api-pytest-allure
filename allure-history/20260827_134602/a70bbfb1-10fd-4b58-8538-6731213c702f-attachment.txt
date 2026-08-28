@@ -1,0 +1,4 @@
+2026-08-27 05:16:53,892 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_data_driven.py::test_user_info ==========
+2026-08-27 05:16:53,926 - INFO - ========== ✅ 用例执行结束：cases/test_api_data_driven.py::test_user_info ==========
+

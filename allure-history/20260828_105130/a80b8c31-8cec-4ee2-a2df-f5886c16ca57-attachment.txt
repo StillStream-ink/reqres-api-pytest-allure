@@ -1,0 +1,9 @@
+[32mINFO    [0m reqres_api:conftest.py:144 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========
+[32mINFO    [0m werkzeug:_internal.py:97 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[32mINFO    [0m werkzeug:_internal.py:97 [33mPress CTRL+C to quit[0m
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 20:33:51] "GET /posts HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:62 ✅ Mock 服务已就绪: http://127.0.0.1:5000
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 20:33:51] "GET /posts HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:147 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========

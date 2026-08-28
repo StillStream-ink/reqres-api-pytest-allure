@@ -1,0 +1,6 @@
+2026-08-26 21:53:09,209 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_product_check_db ==========
+
+2026-08-26 21:53:10,249 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_product_check_db ==========
+
+2026-08-26 21:53:11,285 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_product_check_db ==========
+

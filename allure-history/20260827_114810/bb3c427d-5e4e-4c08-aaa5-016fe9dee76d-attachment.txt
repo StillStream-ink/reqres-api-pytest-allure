@@ -1,0 +1,15 @@
+2026-08-26 13:09:00,993 - INFO - 
+========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_update_post ==========
+2026-08-26 13:09:01,046 - ERROR - ❌ 用例失败：cases/test_mysql_demo.py::test_mysql_update_post，错误信息：<ExceptionInfo OperationalError('no such table: posts') tblen=24>
+2026-08-26 13:09:01,062 - INFO - ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_update_post ==========
+
+2026-08-26 13:09:02,134 - INFO - 
+========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_update_post ==========
+2026-08-26 13:09:02,305 - ERROR - ❌ 用例失败：cases/test_mysql_demo.py::test_mysql_update_post，错误信息：<ExceptionInfo OperationalError('no such table: posts') tblen=24>
+2026-08-26 13:09:02,324 - INFO - ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_update_post ==========
+
+2026-08-26 13:09:03,672 - INFO - 
+========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_update_post ==========
+2026-08-26 13:09:03,930 - ERROR - ❌ 用例失败：cases/test_mysql_demo.py::test_mysql_update_post，错误信息：<ExceptionInfo OperationalError('no such table: posts') tblen=24>
+2026-08-26 13:09:03,948 - INFO - ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_update_post ==========
+

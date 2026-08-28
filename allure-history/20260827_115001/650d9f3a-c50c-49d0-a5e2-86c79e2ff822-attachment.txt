@@ -1,0 +1,2 @@
+2026-08-26 21:53:06,602 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_product_check_db ==========
+

@@ -1,0 +1,4 @@
+2026-08-27 21:46:58,439 - INFO - 
+========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_preset_data ==========
+2026-08-27 21:46:58,460 - INFO - ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_preset_data ==========
+

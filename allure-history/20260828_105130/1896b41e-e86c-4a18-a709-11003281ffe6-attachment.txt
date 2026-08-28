@@ -1,0 +1,5 @@
+[32mINFO    [0m reqres_api:conftest.py:142 
+========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_put_empty_body ==========
+[32mINFO    [0m reqres_api:test_user_flow.py:154 【异常用例】帖子更新传入空body
+[32mINFO    [0m reqres_api:test_user_flow.py:156 空body更新响应：{'body': 'test', 'id': 119, 'title': '空数据测试', 'userId': 1}
+[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_put_empty_body ==========

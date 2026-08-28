@@ -1,0 +1,1 @@
+[32mINFO    [0m reqres_api:conftest.py:127 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_product_check_db ==========

@@ -1,0 +1,4 @@
+2026-08-26 13:23:54,265 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_post_param[2] ==========
+2026-08-26 13:23:54,352 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_post_param[2] ==========
+

@@ -1,0 +1,4 @@
+[32mINFO    [0m reqres_api:conftest.py:122 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_post_param[1] ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [26/Aug/2026 16:27:28] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_post_param[1] ==========

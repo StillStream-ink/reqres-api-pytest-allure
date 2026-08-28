@@ -1,0 +1,1 @@
+[32mINFO    [0m reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_user_full_flow ==========

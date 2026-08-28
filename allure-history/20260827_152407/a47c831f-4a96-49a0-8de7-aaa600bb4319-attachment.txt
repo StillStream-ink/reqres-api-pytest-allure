@@ -1,0 +1,11 @@
+INFO     reqres_api:conftest.py:122 
+========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_full_flow ==========
+INFO     reqres_api:test_user_flow.py:41 【步骤0】创建测试帖子
+INFO     reqres_api:test_user_flow.py:49 创建帖子成功，ID=26
+INFO     reqres_api:test_user_flow.py:53 【步骤1】获取帖子详情
+INFO     reqres_api:test_user_flow.py:59 查询帖子结果：{'body': '链路测试原始内容', 'id': 26, 'title': '链路测试-原始标题', 'userId': 1}
+INFO     reqres_api:test_user_flow.py:63 【步骤2】更新帖子
+INFO     reqres_api:test_user_flow.py:69 更新帖子结果：{'body': '链路测试-更新后的内容', 'id': 26, 'title': '链路测试-更新后的标题', 'userId': 1}
+INFO     reqres_api:test_user_flow.py:73 【步骤3】删除帖子
+INFO     reqres_api:test_user_flow.py:79 删除帖子结果：{'message': 'Deleted'}
+INFO     reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_full_flow ==========

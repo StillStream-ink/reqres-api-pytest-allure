@@ -1,0 +1,6 @@
+INFO     reqres_api:conftest.py:122 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
+INFO     reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
+INFO     reqres_api:conftest.py:122 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
+INFO     reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========

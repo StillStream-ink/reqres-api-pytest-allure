@@ -1,0 +1,5 @@
+2026-08-26 16:50:23,942 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========
+2026-08-26 16:50:24,486 - INFO - ✅ Mock 服务已就绪: http://127.0.0.1:5000
+2026-08-26 16:50:24,520 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========
+

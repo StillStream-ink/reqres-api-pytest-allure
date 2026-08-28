@@ -1,0 +1,51 @@
+name: 质量门禁-校验用例通过率（Docker版）
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  docker-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Create test_mock.db file
+        run: touch test_mock.db
+
+      - name: Build Docker images
+        run: docker-compose build
+
+      - name: Run smoke tests (fast)
+        run: docker-compose run --rm test pytest -m smoke -v --alluredir=allure-results
+        if: github.event_name == 'pull_request'
+
+      - name: Run full regression (Docker)
+        run: docker-compose up --abort-on-container-exit --exit-code-from test
+        if: github.event_name != 'pull_request'
+        timeout-minutes: 10
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
+          retention-days: 30
+
+      - name: 质量门禁检查（仅全量回归）
+        run: |
+          if [ -d "allure-results" ]; then
+            docker run --rm -v $(pwd)/allure-results:/app/allure-results reqres_api_test-test python common/quality_gate.py --dir /app/allure-results --threshold 90
+          else
+            echo "⚠️ 无测试结果，跳过质量门禁"
+          fi
+        if: github.event_name != 'pull_request'

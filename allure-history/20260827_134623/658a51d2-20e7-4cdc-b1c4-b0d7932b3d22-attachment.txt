@@ -1,0 +1,5 @@
+2026-08-26 13:08:47,718 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
+2026-08-26 13:08:47,875 - ERROR - ❌ 用例失败：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db，错误信息：<ExceptionInfo OperationalError('no such table: posts') tblen=24>
+2026-08-26 13:08:47,924 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
+

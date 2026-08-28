@@ -1,0 +1,5 @@
+2026-08-26 15:09:56,677 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
+2026-08-26 15:09:56,712 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
+
+2026-08-26 15:09:56,717 - INFO - 🧹 数据库文件已清理

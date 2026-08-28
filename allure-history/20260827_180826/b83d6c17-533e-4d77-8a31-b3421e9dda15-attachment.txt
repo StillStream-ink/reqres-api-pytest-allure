@@ -1,0 +1,15 @@
+2026-08-27 15:05:30,371 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+2026-08-27 15:05:38,163 - ERROR - ❌ 用例失败：cases/test_performance.py::TestPerformance::test_posts_list_concurrent，错误信息：<ExceptionInfo AssertionError('❌ 平均响应时间 0.710s > 0.5s\nassert 0.7096609568595886 < 0.5\n +  where 0.7096609568595886 = <function mean..., 0.2703280448913574, 0.25945234298706055, ...])\n +    where <function mean at 0x0000029BA0DAE0C0> = statistics.mean') tblen=39>
+2026-08-27 15:05:38,872 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+
+2026-08-27 15:05:39,889 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+2026-08-27 15:05:49,672 - ERROR - ❌ 用例失败：cases/test_performance.py::TestPerformance::test_posts_list_concurrent，错误信息：<ExceptionInfo AssertionError('❌ 平均响应时间 0.856s > 0.5s\nassert 0.856344789981842 < 0.5\n +  where 0.856344789981842 = <function mean a... 0.14653992652893066, 0.14100122451782227, ...])\n +    where <function mean at 0x0000029BA0DAE0C0> = statistics.mean') tblen=39>
+2026-08-27 15:05:49,705 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+
+2026-08-27 15:05:50,730 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+2026-08-27 15:06:02,605 - ERROR - ❌ 用例失败：cases/test_performance.py::TestPerformance::test_posts_list_concurrent，错误信息：<ExceptionInfo AssertionError('❌ 平均响应时间 1.077s > 0.5s\nassert 1.0769401168823243 < 0.5\n +  where 1.0769401168823243 = <function mean..., 0.37819647789001465, 0.4041929244995117, ...])\n +    where <function mean at 0x0000029BA0DAE0C0> = statistics.mean') tblen=39>
+2026-08-27 15:06:02,633 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+
