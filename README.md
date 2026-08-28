@@ -110,12 +110,12 @@ reqres-api-pytest-allure/
 ├── 📄 requirements.txt            # 依赖清单
 └── 📄 README.md                   # 本文件
 
----
+```
 
-⚙️ 多环境配置
+## ⚙️ 多环境配置
 采用 双文件分离架构：接口定义与环境配置完全解耦，通过环境变量 API_ENV 一键切换。
 
-配置分层
+## 配置分层
 文件	职责	是否随环境变化
 config/env_config.yaml	环境参数：base_url、timeout、db_name	✅ 是
 config/api_data.yaml	接口定义：URL 路径、请求方法、请求体模板	❌ 否
@@ -144,7 +144,7 @@ environments:
 切换 test 环境	API_ENV=test pytest
 切换 prod 环境	API_ENV=prod pytest
 Windows PowerShell	$env:API_ENV="test"; pytest
-🚀 快速开始
+## 🚀 快速开始
 1. 克隆项目
 bash
 git clone https://github.com/StillStream-ink/reqres-api-pytest-allure.git
@@ -175,7 +175,7 @@ python run_test.py
 bash
 python common/quality_gate.py
 # 预期输出：✅ 质量门禁通过（有效通过率 100% > 阈值 90%）
-📊 报告预览
+## 📊 报告预览
 全量回归总览（64 用例 / 8 大模块 / 100% 有效通过率）
 https://assets/v2/allure_overview_64.png
 
@@ -194,7 +194,7 @@ https://assets/v2/locust_8495_0fail.png
 质量门禁通过
 https://assets/v2/quality_gate_pass.png
 
-📋 测试范围
+## 📋 测试范围
 核心模块（test_api_demo.py，30 个用例）
 模块	用例数	覆盖功能
 文章模块	9	CRUD + 参数化 + 数据库双检 + Schema 校验
@@ -210,7 +210,7 @@ https://assets/v2/quality_gate_pass.png
 MySQL 集成测试	3	接口 + 数据库双向断言
 性能测试（test_performance.py）	5	并发压测
 合计	64	59 passed，5 skipped
-🎯 企业级能力清单
+## 🎯 企业级能力清单
 能力	状态
 接口功能测试（30+ 用例）	✅
 数据库双检（接口+DB 一致性）	✅
@@ -225,7 +225,7 @@ Allure 可视化报告	✅
 质量门禁（90% 阈值）	✅
 CI/CD（GitHub Actions）	✅
 Docker 一键运行	✅
-💡 踩坑记录
+## 💡 踩坑记录
 问题	原因	解决方案
 POST 新增后查询 404	JSONPlaceholder 仅模拟成功，不持久化数据	自研 Flask + SQLite 本地 Mock 服务
 公网接口偶发失败	网络抖动	集成 tenacity 自动重试
@@ -234,7 +234,7 @@ JSON Schema 安装失败	C 盘空间不足	清理磁盘空间，删除 allure-re
 并发执行时 PermissionError	多个 worker 同时删除数据库文件	增加重试机制
 质量门禁统计失真	旧 allure-results 未清理	CI 流水线每次构建前强制清理
 Docker 构建卡住	Docker 缓存或磁盘 I/O 问题	使用 docker builder prune -a -f 清理缓存
-🎯 拓展方向
+## 🎯 拓展方向
 ✅ 自研本地 Mock 服务，消除外部 API 依赖
 
 ✅ 接口 + 数据库双向断言
