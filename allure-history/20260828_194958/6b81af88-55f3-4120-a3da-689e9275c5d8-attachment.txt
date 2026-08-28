@@ -1,0 +1,21 @@
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_param_invalid_id[9999-404] ==========
+
+[32mINFO    [0m reqres_api:conftest.py:77 🧹 数据库文件已清理
+[32mINFO    [0m reqres_api:conftest.py:192 🧹 开始清理测试数据...
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m reqres_api:conftest.py:194 ✅ 数据库已重置，测试数据已清理
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:09] "GET /posts/1 HTTP/1.1" 200 -

@@ -1,6 +1,0 @@
-2026-08-26 21:52:56,899 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_product ==========
-
-2026-08-26 21:52:57,950 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_product ==========
-
-2026-08-26 21:52:59,002 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_product ==========
-

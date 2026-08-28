@@ -1,2 +1,0 @@
-2026-08-27 11:19:51,707 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_post_check_db ==========
-

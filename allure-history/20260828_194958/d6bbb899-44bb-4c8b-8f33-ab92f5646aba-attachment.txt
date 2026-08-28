@@ -1,0 +1,9 @@
+2026-08-28 19:47:39,982 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_create_concurrent ==========
+2026-08-28 19:47:46,193 - ERROR - ❌ 用例失败：cases/test_performance.py::TestPerformance::test_posts_create_concurrent，错误信息：<ExceptionInfo AssertionError('❌ 平均响应时间 1.144s > 1.0s\nassert 1.1443296933174134 < 1.0\n +  where 1.1443296933174134 = <function mean..., 0.42617297172546387, 0.5110929012298584, ...])\n +    where <function mean at 0x000001B68FDB65C0> = statistics.mean') tblen=39>
+2026-08-28 19:47:46,652 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_create_concurrent ==========
+
+2026-08-28 19:47:47,674 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_create_concurrent ==========
+2026-08-28 19:47:52,240 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_create_concurrent ==========
+

@@ -1,2 +1,0 @@
-2026-08-26 17:24:05,661 - INFO - ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_param_invalid_id[-1-404] ==========
-

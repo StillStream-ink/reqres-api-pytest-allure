@@ -1,5 +1,0 @@
-INFO     reqres_api:conftest.py:122 
-========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_put_empty_body ==========
-INFO     reqres_api:test_user_flow.py:154 【异常用例】帖子更新传入空body
-INFO     reqres_api:test_user_flow.py:156 空body更新响应：{'body': 'test', 'id': 27, 'title': '空数据测试', 'userId': 1}
-INFO     reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_put_empty_body ==========

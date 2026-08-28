@@ -1,0 +1,7 @@
+[32mINFO    [0m reqres_api:conftest.py:146 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+[32mINFO    [0m reqres_api:conftest.py:149 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+
+[32mINFO    [0m reqres_api:conftest.py:77 🧹 数据库文件已清理
+[32mINFO    [0m reqres_api:conftest.py:223 🧹 开始清理测试数据...
+[32mINFO    [0m reqres_api:conftest.py:225 ✅ 数据库已重置，测试数据已清理

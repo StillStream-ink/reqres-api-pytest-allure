@@ -1,6 +1,0 @@
-2026-08-26 21:52:37,537 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
-
-2026-08-26 21:52:38,598 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
-
-2026-08-26 21:52:39,663 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
-

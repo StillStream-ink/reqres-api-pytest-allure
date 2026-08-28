@@ -1,4 +1,0 @@
-2026-08-26 21:53:15,524 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_order ==========
-
-2026-08-26 21:53:16,547 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_order ==========
-

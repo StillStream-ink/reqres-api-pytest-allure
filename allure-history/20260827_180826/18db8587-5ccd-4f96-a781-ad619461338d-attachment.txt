@@ -1,6 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:122 
-========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_param_invalid_id[9999-404] ==========
-[32mINFO    [0m reqres_api:test_user_flow.py:175 【参数化异常】帖子id=9999，预期状态码404
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [26/Aug/2026 17:26:28] "[33mGET /posts/9999 HTTP/1.1[0m" 404 -
-[32mINFO    [0m reqres_api:test_user_flow.py:178 实际状态码：404
-[32mINFO    [0m reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_param_invalid_id[9999-404] ==========

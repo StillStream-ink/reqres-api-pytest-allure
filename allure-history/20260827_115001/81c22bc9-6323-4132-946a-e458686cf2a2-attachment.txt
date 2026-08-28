@@ -1,2 +1,0 @@
-2026-08-27 11:19:58,019 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_product ==========
-

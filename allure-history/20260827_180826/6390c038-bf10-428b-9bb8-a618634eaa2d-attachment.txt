@@ -1,9 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:142 
-========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
-[32mINFO    [0m reqres_api:test_api_demo.py:24 ==== Fixture前置：创建测试文章 ====
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:50:09] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:50:09] "GET /posts/10 HTTP/1.1" 200 -
-[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
-
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:50:09] "DELETE /posts/10 HTTP/1.1" 200 -
-[32mINFO    [0m reqres_api:test_api_demo.py:33 ==== Fixture清理：删除文章 10 ====

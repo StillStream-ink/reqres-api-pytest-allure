@@ -1,0 +1,5 @@
+[32mINFO    [0m reqres_api:conftest.py:144 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_single_order ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 18:51:00] "[35m[1mPOST /orders HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 18:51:00] "GET /orders/4 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:147 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_order ==========

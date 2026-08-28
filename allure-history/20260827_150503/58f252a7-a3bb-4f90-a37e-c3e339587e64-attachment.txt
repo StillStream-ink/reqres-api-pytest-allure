@@ -1,6 +1,0 @@
-2026-08-27 11:48:18,389 - INFO - 
-========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_post ==========
-2026-08-27 11:48:18,391 - INFO - ==== Fixture前置：创建测试文章 ====
-2026-08-27 11:48:18,413 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_post ==========
-
-2026-08-27 11:48:18,423 - INFO - ==== Fixture清理：删除文章 12 ====

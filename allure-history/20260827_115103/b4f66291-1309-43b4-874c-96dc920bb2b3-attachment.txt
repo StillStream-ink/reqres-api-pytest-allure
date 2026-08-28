@@ -1,4 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:122 
-========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_create_post ==========
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [26/Aug/2026 16:27:28] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
-[32mINFO    [0m reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_post ==========

@@ -1,4 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:142 
-========== 🚀 开始执行用例：cases/test_api_data_driven.py::test_post_param[1] ==========
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:50:08] "GET /posts/1 HTTP/1.1" 200 -
-[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_api_data_driven.py::test_post_param[1] ==========

@@ -1,7 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:142 
-========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_param_invalid_id[0-404] ==========
-[32mINFO    [0m reqres_api:test_user_flow.py:175 【参数化异常】帖子id=0，预期状态码404
-[1m[31mERROR   [0m common.http_util:http_util.py:36 📥 响应: 404 | Body: {"error":"Not found"}
-
-[32mINFO    [0m reqres_api:test_user_flow.py:178 实际状态码：404
-[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_param_invalid_id[0-404] ==========

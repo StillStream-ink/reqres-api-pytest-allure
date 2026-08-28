@@ -1,3 +1,0 @@
-INFO     reqres_api:conftest.py:142 
-========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_update_post ==========
-INFO     reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_update_post ==========

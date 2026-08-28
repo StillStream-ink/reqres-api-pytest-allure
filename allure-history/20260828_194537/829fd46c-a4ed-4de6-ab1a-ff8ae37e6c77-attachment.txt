@@ -1,0 +1,6 @@
+2026-08-28 19:41:28,833 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+2026-08-28 19:41:28,990 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+
+2026-08-28 19:41:29,003 - INFO - 🧹 开始清理测试数据...
+2026-08-28 19:41:29,055 - WARNING - ⚠️ 数据清理失败: table posts already exists

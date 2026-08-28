@@ -1,2 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:127 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_orders_list ==========
-[32mINFO    [0m reqres_api:conftest.py:127 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_orders_list ==========

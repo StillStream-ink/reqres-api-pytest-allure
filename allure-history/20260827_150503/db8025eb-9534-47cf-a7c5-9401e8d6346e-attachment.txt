@@ -1,5 +1,0 @@
-2026-08-26 13:08:53,909 - INFO - 
-========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_product_check_db ==========
-2026-08-26 13:08:53,984 - ERROR - ❌ 用例失败：cases/test_api_demo.py::TestPostAPI::test_update_product_check_db，错误信息：<ExceptionInfo OperationalError('no such table: products') tblen=24>
-2026-08-26 13:08:54,015 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_product_check_db ==========
-

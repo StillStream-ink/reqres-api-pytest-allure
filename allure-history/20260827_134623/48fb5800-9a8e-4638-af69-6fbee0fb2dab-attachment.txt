@@ -1,6 +1,0 @@
-2026-08-26 21:53:13,416 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_order ==========
-
-2026-08-26 21:53:14,448 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_order ==========
-
-2026-08-26 21:53:15,488 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_order ==========
-

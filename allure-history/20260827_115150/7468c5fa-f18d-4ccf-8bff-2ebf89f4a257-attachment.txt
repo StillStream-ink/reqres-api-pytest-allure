@@ -1,4 +1,0 @@
-2026-08-26 17:39:23,605 - INFO - 
-========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_delete_post ==========
-2026-08-26 17:39:23,661 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_post ==========
-

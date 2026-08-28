@@ -1,6 +1,0 @@
-2026-08-27 05:09:33,894 - INFO - 
-========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_put_empty_body ==========
-2026-08-27 05:09:33,933 - INFO - 【异常用例】帖子更新传入空body
-2026-08-27 05:09:33,959 - INFO - 空body更新响应：{'body': 'test', 'id': 19, 'title': '空数据测试', 'userId': 1}
-2026-08-27 05:09:33,994 - INFO - ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_put_empty_body ==========
-

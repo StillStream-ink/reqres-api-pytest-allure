@@ -1,6 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:122 
-========== 🚀 开始执行用例：cases/test_user_flow.py::test_user_param_invalid_id[0-404] ==========
-[32mINFO    [0m reqres_api:test_user_flow.py:192 【参数化异常】用户id=0，预期状态码404
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [26/Aug/2026 17:26:29] "[33mGET /users/0 HTTP/1.1[0m" 404 -
-[32mINFO    [0m reqres_api:test_user_flow.py:194 实际状态码：404
-[32mINFO    [0m reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_user_param_invalid_id[0-404] ==========

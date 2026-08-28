@@ -9,6 +9,22 @@ from common.mock_server import get_db, USE_MYSQL
 from common.http_util import send_request
 from common.db_checker import check_and_assert
 import allure
+from config.schemas import (
+    posts_list_schema,
+    post_detail_schema,
+    post_create_schema,
+    products_list_schema,
+    product_detail_schema,
+    product_create_schema,
+    orders_list_schema,
+    order_detail_schema,
+    order_create_schema,
+    comments_list_schema,
+    comment_detail_schema,
+    comment_create_schema,
+    user_schema
+)
+from common.schema_util import validate_with_step
 
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 test_data = read_yaml(os.path.join(base_path, "config/test_data.yaml"))
@@ -49,8 +65,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert isinstance(resp.json(), list)
-            assert len(resp.json()) >= 2
+            data = resp.json()
+            assert isinstance(data, list)
+            assert len(data) >= 2
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, posts_list_schema, "文章列表")
 
     @allure.feature("文章模块")
     @allure.story("获取单篇文章")
@@ -62,7 +82,11 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["id"] == new_post_id
+            data = resp.json()
+            assert data["id"] == new_post_id
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, post_detail_schema, "单篇文章")
 
     @allure.feature("文章模块")
     @allure.story("参数化查询文章")
@@ -74,7 +98,11 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["id"] == post_id
+            data = resp.json()
+            assert data["id"] == post_id
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, post_detail_schema, f"单篇文章ID={post_id}")
 
     @allure.feature("文章模块")
     @allure.story("新增文章")
@@ -94,8 +122,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 201
-            assert resp.json()["title"] == json_body["title"]
-            assert "id" in resp.json()
+            data = resp.json()
+            assert data["title"] == json_body["title"]
+            assert "id" in data
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, post_create_schema, "创建文章")
 
     @allure.feature("文章模块")
     @allure.story("修改文章")
@@ -114,7 +146,11 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["title"] == json_body["title"]
+            data = resp.json()
+            assert data["title"] == json_body["title"]
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, post_detail_schema, "修改文章")
 
     @allure.feature("文章模块")
     @allure.story("删除文章")
@@ -156,6 +192,9 @@ class TestPostAPI:
             expected = {"title": json_body["title"], "body": json_body["body"]}
             check_and_assert("posts", post_id, expected)
 
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), post_create_schema, "创建文章(DB双检)")
+
     @allure.feature("文章模块")
     @allure.story("修改文章-接口+数据库校验")
     @pytest.mark.db
@@ -182,6 +221,9 @@ class TestPostAPI:
             expected = {"title": json_body["title"], "body": json_body["body"]}
             check_and_assert("posts", post_id, expected)
 
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), post_detail_schema, "修改文章(DB双检)")
+
     # ==================== 商品模块 ====================
     @allure.feature("商品模块")
     @allure.story("获取商品列表")
@@ -192,8 +234,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert isinstance(resp.json(), list)
-            assert len(resp.json()) >= 2
+            data = resp.json()
+            assert isinstance(data, list)
+            assert len(data) >= 2
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, products_list_schema, "商品列表")
 
     @allure.feature("商品模块")
     @allure.story("创建商品")
@@ -208,8 +254,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 201
-            assert resp.json()["name"] == json_body["name"]
-            assert "id" in resp.json()
+            data = resp.json()
+            assert data["name"] == json_body["name"]
+            assert "id" in data
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, product_create_schema, "创建商品")
 
     @allure.feature("商品模块")
     @allure.story("获取单个商品")
@@ -228,8 +278,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["id"] == product_id
-            assert resp.json()["name"] == "单测商品"
+            data = resp.json()
+            assert data["id"] == product_id
+            assert data["name"] == "单测商品"
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, product_detail_schema, "单个商品")
 
     @allure.feature("商品模块")
     @allure.story("修改商品")
@@ -251,8 +305,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["name"] == update_body["name"]
-            assert resp.json()["price"] == update_body["price"]
+            data = resp.json()
+            assert data["name"] == update_body["name"]
+            assert data["price"] == update_body["price"]
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, product_detail_schema, "修改商品")
 
     @allure.feature("商品模块")
     @allure.story("删除商品")
@@ -295,6 +353,9 @@ class TestPostAPI:
             expected = {"name": json_body["name"], "price": json_body["price"]}
             check_and_assert("products", product_id, expected)
 
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), product_create_schema, "创建商品(DB双检)")
+
     @allure.feature("商品模块")
     @allure.story("修改商品-接口+数据库校验")
     @pytest.mark.db
@@ -321,6 +382,9 @@ class TestPostAPI:
             expected = {"name": json_body["name"], "price": json_body["price"]}
             check_and_assert("products", product_id, expected)
 
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), product_detail_schema, "修改商品(DB双检)")
+
     # ==================== 订单模块 ====================
     @allure.feature("订单模块")
     @allure.story("获取订单列表")
@@ -331,8 +395,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert isinstance(resp.json(), list)
-            assert len(resp.json()) >= 2
+            data = resp.json()
+            assert isinstance(data, list)
+            assert len(data) >= 2
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, orders_list_schema, "订单列表")
 
     @allure.feature("订单模块")
     @allure.story("创建订单")
@@ -347,8 +415,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 201
-            assert resp.json()["user_id"] == json_body["user_id"]
-            assert "id" in resp.json()
+            data = resp.json()
+            assert data["user_id"] == json_body["user_id"]
+            assert "id" in data
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, order_create_schema, "创建订单")
 
     @allure.feature("订单模块")
     @allure.story("获取单个订单")
@@ -366,7 +438,11 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["id"] == order_id
+            data = resp.json()
+            assert data["id"] == order_id
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, order_detail_schema, "单个订单")
 
     @allure.feature("订单模块")
     @allure.story("修改订单")
@@ -387,8 +463,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["status"] == update_body["status"]
-            assert resp.json()["quantity"] == update_body["quantity"]
+            data = resp.json()
+            assert data["status"] == update_body["status"]
+            assert data["quantity"] == update_body["quantity"]
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, order_detail_schema, "修改订单")
 
     @allure.feature("订单模块")
     @allure.story("删除订单")
@@ -425,6 +505,9 @@ class TestPostAPI:
             expected = {"user_id": json_body["user_id"], "quantity": json_body["quantity"], "status": json_body["status"]}
             check_and_assert("orders", order_id, expected)
 
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), order_create_schema, "创建订单(DB双检)")
+
     @allure.feature("订单模块")
     @allure.story("修改订单-接口+数据库校验")
     @pytest.mark.db
@@ -447,6 +530,9 @@ class TestPostAPI:
             expected = {"quantity": json_body["quantity"], "status": json_body["status"]}
             check_and_assert("orders", order_id, expected)
 
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), order_detail_schema, "修改订单(DB双检)")
+
     # ==================== 评论模块 ====================
     @allure.feature("评论模块")
     @allure.story("获取评论列表")
@@ -457,8 +543,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert isinstance(resp.json(), list)
-            assert len(resp.json()) >= 2
+            data = resp.json()
+            assert isinstance(data, list)
+            assert len(data) >= 2
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, comments_list_schema, "评论列表")
 
     @allure.feature("评论模块")
     @allure.story("创建评论")
@@ -473,8 +563,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 201
-            assert resp.json()["content"] == json_body["content"]
-            assert "id" in resp.json()
+            data = resp.json()
+            assert data["content"] == json_body["content"]
+            assert "id" in data
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, comment_create_schema, "创建评论")
 
     @allure.feature("评论模块")
     @allure.story("获取单个评论")
@@ -493,8 +587,12 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["id"] == comment_id
-            assert resp.json()["content"] == "单测评论"
+            data = resp.json()
+            assert data["id"] == comment_id
+            assert data["content"] == "单测评论"
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, comment_detail_schema, "单个评论")
 
     @allure.feature("评论模块")
     @allure.story("修改评论")
@@ -516,7 +614,11 @@ class TestPostAPI:
 
         with allure.step("断言校验"):
             assert resp.status_code == 200
-            assert resp.json()["content"] == update_body["content"]
+            data = resp.json()
+            assert data["content"] == update_body["content"]
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, comment_detail_schema, "修改评论")
 
     @allure.feature("评论模块")
     @allure.story("删除评论")
@@ -556,6 +658,9 @@ class TestPostAPI:
             expected = {"content": json_body["content"], "user_id": json_body["user_id"]}
             check_and_assert("comments", comment_id, expected)
 
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), comment_create_schema, "创建评论(DB双检)")
+
     @allure.feature("评论模块")
     @allure.story("修改评论-接口+数据库校验")
     @pytest.mark.db
@@ -578,3 +683,6 @@ class TestPostAPI:
         with allure.step("Step2: 查询数据库校验更新"):
             expected = {"content": json_body["content"]}
             check_and_assert("comments", comment_id, expected)
+
+        # 🆕 JSON Schema 校验
+        validate_with_step(resp.json(), comment_detail_schema, "修改评论(DB双检)")

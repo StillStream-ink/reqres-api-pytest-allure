@@ -1,0 +1,7 @@
+[32mINFO    [0m reqres_api:conftest.py:144 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 18:51:01] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 18:51:01] "PUT /comments/8 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:147 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+
+[32mINFO    [0m reqres_api:conftest.py:75 🧹 数据库文件已清理

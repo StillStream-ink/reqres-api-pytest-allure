@@ -1,0 +1,4 @@
+[32mINFO    [0m reqres_api:conftest.py:144 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 18:51:00] "GET /products HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:147 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========

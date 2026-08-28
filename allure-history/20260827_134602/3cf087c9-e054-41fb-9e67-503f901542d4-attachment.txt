@@ -1,7 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:142 
-========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_delete_post ==========
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:50:09] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:50:09] "DELETE /posts/13 HTTP/1.1" 200 -
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:50:09] "[33mGET /posts/13 HTTP/1.1[0m" 404 -
-[31m[1mERROR   [0m common.http_util:http_util.py:36 📥 响应: 404 | Body: {"error":"Not found"}
-[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_post ==========

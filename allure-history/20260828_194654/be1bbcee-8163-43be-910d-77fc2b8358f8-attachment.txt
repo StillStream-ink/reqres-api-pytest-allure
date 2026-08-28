@@ -1,0 +1,18 @@
+2026-08-28 19:41:28,963 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+2026-08-28 19:41:29,066 - ERROR - ❌ 用例失败：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db，错误信息：<ExceptionInfo AssertionError('assert 404 == 200\n +  where 404 = <Response [404]>.status_code') tblen=39>
+2026-08-28 19:41:29,565 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+
+2026-08-28 19:41:30,588 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+2026-08-28 19:41:30,638 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+
+2026-08-28 19:41:30,645 - INFO - 🧹 开始清理测试数据...
+2026-08-28 19:41:30,690 - INFO - ✅ 数据库已重置，测试数据已清理
+2026-08-28 19:41:31,750 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+2026-08-28 19:41:31,803 - INFO - ✅ Mock 服务已就绪: http://127.0.0.1:5000
+2026-08-28 19:41:31,879 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+
+2026-08-28 19:41:31,884 - INFO - 🧹 开始清理测试数据...
+2026-08-28 19:41:31,926 - INFO - ✅ 数据库已重置，测试数据已清理

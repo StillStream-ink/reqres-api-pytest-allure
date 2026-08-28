@@ -1,9 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:142 
-========== 🚀 开始执行用例：cases/test_user_flow.py::test_user_full_flow ==========
-[32mINFO    [0m reqres_api:test_user_flow.py:100 【用户步骤1】查询用户信息
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:52:05] "GET /users/1 HTTP/1.1" 200 -
-[32mINFO    [0m reqres_api:test_user_flow.py:106 用户详情：{'email': 'zhangsan@test.com', 'id': 1, 'name': 'ZhangSan', 'username': 'zhangsan'}
-[32mINFO    [0m reqres_api:test_user_flow.py:110 【用户步骤2】更新用户信息
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [27/Aug/2026 11:52:05] "PUT /users/1 HTTP/1.1" 200 -
-[32mINFO    [0m reqres_api:test_user_flow.py:116 更新后用户：{'email': 'updated@test.com', 'id': 1, 'name': '更新后的用户名', 'username': 'updated_user'}
-[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_user_full_flow ==========

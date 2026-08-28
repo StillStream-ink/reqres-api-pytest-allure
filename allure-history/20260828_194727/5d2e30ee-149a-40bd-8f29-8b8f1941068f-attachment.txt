@@ -1,0 +1,10 @@
+2026-08-28 19:45:42,468 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========
+2026-08-28 19:45:42,671 - INFO - ✅ Mock 服务已就绪: http://127.0.0.1:5000
+2026-08-28 19:45:42,748 - ERROR - ❌ 用例失败：cases/test_api_demo.py::TestPostAPI::test_get_post_list，错误信息：<ExceptionInfo AssertionError('assert 0 >= 2\n +  where 0 = len([])') tblen=39>
+2026-08-28 19:45:43,700 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========
+
+2026-08-28 19:45:44,720 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========
+2026-08-28 19:45:44,742 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_post_list ==========
+

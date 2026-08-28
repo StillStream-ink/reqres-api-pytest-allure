@@ -1,6 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:122 
-========== 🚀 开始执行用例：cases/test_user_flow.py::test_user_invalid_id ==========
-[32mINFO    [0m reqres_api:test_user_flow.py:135 【异常用例】查询不存在用户id=9999
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [26/Aug/2026 17:26:28] "[33mGET /users/9999 HTTP/1.1[0m" 404 -
-[32mINFO    [0m reqres_api:test_user_flow.py:138 响应状态码：404
-[32mINFO    [0m reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_user_invalid_id ==========

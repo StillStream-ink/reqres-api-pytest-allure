@@ -1,5 +1,0 @@
-[32mINFO    [0m reqres_api:conftest.py:122 
-========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_update_post ==========
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [26/Aug/2026 18:07:02] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
-[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [26/Aug/2026 18:07:02] "PUT /posts/17 HTTP/1.1" 200 -
-[32mINFO    [0m reqres_api:conftest.py:125 ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_update_post ==========

@@ -6,6 +6,13 @@ import copy
 from common.yaml_util import read_yaml, replace_placeholder
 from common.assert_util import *
 from common.config_util import ENV_CONFIG
+from config.schemas import (
+    posts_list_schema,
+    post_detail_schema,
+    post_create_schema,
+    user_schema
+)
+from common.schema_util import validate_with_step
 
 BASE_URL = ENV_CONFIG["base_url"]
 TIMEOUT = ENV_CONFIG["timeout"]
@@ -49,28 +56,38 @@ def run_api_case(case_info, replace_data=None):
 @allure.feature("文章模块")
 @allure.story("获取文章列表")
 def test_post_list():
-    run_api_case(yaml_data["post_list"])
+    resp = run_api_case(yaml_data["post_list"])
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), posts_list_schema, "文章列表(数据驱动)")
 
 @allure.feature("文章模块")
 @allure.story("获取单篇文章")
 def test_post_single():
-    run_api_case(yaml_data["post_single"])
+    resp = run_api_case(yaml_data["post_single"])
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), post_detail_schema, "单篇文章(数据驱动)")
 
 @allure.feature("文章模块")
 @allure.story("参数化查询文章")
 @pytest.mark.parametrize("post_id", yaml_data["post_param"]["params_list"])
 def test_post_param(post_id):
-    run_api_case(yaml_data["post_param"], replace_data={"post_id":post_id})
+    resp = run_api_case(yaml_data["post_param"], replace_data={"post_id":post_id})
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), post_detail_schema, f"参数化查询文章ID={post_id}")
 
 @allure.feature("文章模块")
 @allure.story("新增文章")
 def test_post_create():
-    run_api_case(yaml_data["post_create"])
+    resp = run_api_case(yaml_data["post_create"])
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), post_create_schema, "创建文章(数据驱动)")
 
 @allure.feature("文章模块")
 @allure.story("修改文章")
 def test_post_update():
-    run_api_case(yaml_data["post_update"])
+    resp = run_api_case(yaml_data["post_update"])
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), post_detail_schema, "修改文章(数据驱动)")
 
 @allure.feature("文章模块")
 @allure.story("删除文章")
@@ -90,9 +107,11 @@ def test_post_delete():
     run_api_case(case_info)
 
 @allure.feature("用户模块")
-@allure.story("用户信息查询（带token鉴权）""用户信息查询（带token鉴权）")
+@allure.story("用户信息查询（带token鉴权）")
 def test_user_info(user_token):
-    run_api_case(yaml_data["user_info"])
+    resp = run_api_case(yaml_data["user_info"])
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), user_schema, "用户信息(数据驱动)")
 
 # -------------------- 业务链路：文章全生命周期（串行依赖）--------------------
 @pytest.fixture(scope="class")
@@ -118,7 +137,9 @@ def test_flow_get(flow_post_id):
     case_info = copy.deepcopy(yaml_data["post_flow_get"])
     if "check" in case_info and "equal" in case_info["check"]:
         case_info["check"]["equal"]["id"] = str(flow_post_id)
-    run_api_case(case_info, replace_data={"flow_post_id": flow_post_id})
+    resp = run_api_case(case_info, replace_data={"flow_post_id": flow_post_id})
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), post_detail_schema, "链路查询文章")
 
 @allure.feature("文章模块")
 @allure.story("文章完整业务链路-修改")
@@ -126,7 +147,9 @@ def test_flow_update(flow_post_id):
     case_info = copy.deepcopy(yaml_data["post_flow_update"])
     if "check" in case_info and "equal" in case_info["check"]:
         case_info["check"]["equal"]["id"] = str(flow_post_id)
-    run_api_case(case_info, replace_data={"flow_post_id": flow_post_id})
+    resp = run_api_case(case_info, replace_data={"flow_post_id": flow_post_id})
+    # 🆕 JSON Schema 校验
+    validate_with_step(resp.json(), post_detail_schema, "链路修改文章")
 
 @allure.feature("文章模块")
 @allure.story("文章完整业务链路-删除")

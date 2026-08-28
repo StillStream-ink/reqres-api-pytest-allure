@@ -1,4 +1,0 @@
-2026-08-27 15:07:06,567 - INFO - 
-========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
-2026-08-27 15:07:13,216 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
-

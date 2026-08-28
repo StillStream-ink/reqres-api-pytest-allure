@@ -6,6 +6,8 @@ from common.log_util import logger
 from common.http_util import send_request
 from common.config_util import ENV_CONFIG
 import os
+from config.schemas import user_schema, post_detail_schema
+from common.schema_util import validate_with_step
 
 # 从环境配置读取 base_url，不再硬编码
 BASE_URL = ENV_CONFIG["base_url"]
@@ -58,6 +60,8 @@ def test_post_full_flow():
         assert isinstance(data, dict), "接口返回不是json对象"
         logger.info(f"查询帖子结果：{data}")
         assert data["id"] == post_id
+        # 🆕 JSON Schema 校验
+        validate_with_step(data, post_detail_schema, "帖子详情(全流程)")
 
         # 步骤2：更新帖子
         logger.info("【步骤2】更新帖子")
@@ -68,6 +72,8 @@ def test_post_full_flow():
         assert isinstance(data_put, dict), "接口返回不是json对象"
         logger.info(f"更新帖子结果：{data_put}")
         assert data_put["title"] == UPDATE_BODY["title"]
+        # 🆕 JSON Schema 校验
+        validate_with_step(data_put, post_detail_schema, "帖子更新(全流程)")
 
         # 步骤3：删除帖子
         logger.info("【步骤3】删除帖子")
@@ -105,6 +111,8 @@ def test_user_full_flow():
     assert isinstance(data, dict), "接口返回不是json对象"
     logger.info(f"用户详情：{data}")
     assert data["id"] == user_id
+    # 🆕 JSON Schema 校验
+    validate_with_step(data, user_schema, "用户信息(全流程)")
 
     # 步骤2：更新用户信息
     logger.info("【用户步骤2】更新用户信息")
