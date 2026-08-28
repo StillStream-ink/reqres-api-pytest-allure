@@ -23,14 +23,14 @@ jobs:
         run: touch test_mock.db
 
       - name: Build Docker images
-        run: docker-compose build
+        run: docker compose build
 
       - name: Run smoke tests (fast)
-        run: docker-compose run --rm test pytest -m smoke -v --alluredir=allure-results
+        run: docker compose run --rm test pytest -m smoke -v --alluredir=allure-results
         if: github.event_name == 'pull_request'
 
       - name: Run full regression (Docker)
-        run: docker-compose up --abort-on-container-exit --exit-code-from test
+        run: docker compose up --abort-on-container-exit --exit-code-from test
         if: github.event_name != 'pull_request'
         timeout-minutes: 10
 
