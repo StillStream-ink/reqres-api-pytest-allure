@@ -1,0 +1,18 @@
+PUT /comments/8 HTTP/1.1
+Host: 127.0.0.1:5000
+User-Agent: python-requests/2.34.2
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Content-Type: application/json;charset=utf-8
+Content-Length: 54
+
+{"content": "DB\u53cc\u68c0-\u66f4\u65b0\u8bc4\u8bba"}
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.8 Python/3.11.5
+Date: Fri, 28 Aug 2026 13:07:19 GMT
+Content-Type: application/json
+Content-Length: 85
+Connection: close
+
+{"content":"DB\u53cc\u68c0-\u66f4\u65b0\u8bc4\u8bba","id":8,"post_id":1,"user_id":1}
