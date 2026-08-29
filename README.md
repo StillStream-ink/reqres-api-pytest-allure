@@ -255,7 +255,7 @@ python common/quality_gate.py
 ![MySQL Integration](assets/v2/allure_mysql_integration.png)
 
 ### 质量门禁 100% 通过
-![Quality Gate 100%](assets/v2/allure_overview_100pass.png)
+![Quality Gate 100%](assets/v2/quality_gate_pass.png)
 
 
 ## 🔍 Wireshark 抓包调试
