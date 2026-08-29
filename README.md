@@ -293,10 +293,10 @@ python common/quality_gate.py
 ### 抓包截图示例
 
 **HTTP 流完整对话：**
-![HTTP Stream](https://assets/v2/debug_http_stream.png)
+![HTTP Stream](assets/v2/debug_http_stream.png)
 
 **数据包列表：**
-![Packet List](https://assets/v2/debug_packet_list.png)
+![Packet List](assets/v2/debug_packet_list.png)
 
 ---
 
