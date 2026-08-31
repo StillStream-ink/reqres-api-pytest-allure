@@ -29,23 +29,6 @@ jobs:
         run: docker compose run --rm test pytest -m smoke -v --alluredir=allure-results
         if: github.event_name == 'pull_request'
 
-      - name: Start mock service in background
-        run: docker compose up -d mock
-        if: github.event_name != 'pull_request'
-
-      - name: Wait for mock service to be ready
-        run: |
-          echo "⏳ Waiting for mock service to be ready..."
-          for i in $(seq 1 30); do
-            if docker compose exec -T mock curl -s http://localhost:5000/posts > /dev/null 2>&1; then
-              echo "✅ Mock service is ready!"
-              break
-            fi
-            echo "⏳ Attempt $i/30: mock not ready yet, waiting..."
-            sleep 2
-          done
-        if: github.event_name != 'pull_request'
-
       - name: Run full regression (Docker)
         run: docker compose up --abort-on-container-exit --exit-code-from test
         if: github.event_name != 'pull_request'
