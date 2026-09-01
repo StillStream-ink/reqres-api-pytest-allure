@@ -1,5 +1,6 @@
 # 🧪 ReqRes 接口自动化测试框架
 
+
 [![CI](https://github.com/StillStream-ink/reqres-api-pytest-allure/actions/workflows/pytest-auto.yml/badge.svg)](https://github.com/StillStream-ink/reqres-api-pytest-allure/actions)
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
 [![Pytest](https://img.shields.io/badge/Pytest-8.x-green)](https://docs.pytest.org/)
