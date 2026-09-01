@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mysql:
     image: mysql:8.0
@@ -8,7 +10,7 @@ services:
       MYSQL_USER: testuser
       MYSQL_PASSWORD: testpass
     ports:
-      - "3307:3306"  # 注意这里改过端口，避免和本机冲突
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./init_mysql.sql:/docker-entrypoint-initdb.d/init_mysql.sql
@@ -24,16 +26,14 @@ services:
     container_name: reqres_mock
     ports:
       - "5000:5000"
-    volumes:
-      - ./test_mock.db:/app/test_mock.db   # ✅ 关键：挂载 SQLite 文件到 mock 容器
     environment:
       - API_ENV=docker
+      - DOCKER_ENV=true          # 🆕 关键：告诉 start_mock.py 要等待 MySQL
       - MYSQL_HOST=mysql
       - MYSQL_PORT=3306
       - MYSQL_USER=testuser
       - MYSQL_PASSWORD=testpass
       - MYSQL_DB=reqres_test
-      - USE_MYSQL=False    # ✅ 关键：强制使用 SQLite
     depends_on:
       mysql:
         condition: service_healthy
@@ -46,20 +46,21 @@ services:
     depends_on:
       mock:
         condition: service_started
-    volumes:
-      - ./test_mock.db:/app/test_mock.db   # ✅ 关键：挂载同一个文件到 test 容器
-      - ./allure-results:/app/allure-results
     environment:
       - API_ENV=docker
-      - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
-      - MYSQL_USER=testuser
-      - MYSQL_PASSWORD=testpass
-      - MYSQL_DB=reqres_test
-      - USE_MYSQL=False    # ✅ 关键：强制使用 SQLite
       - RUN_SKIPPED=1
     command: >
-      sh -c "sleep 10 && python -m pytest cases/ -v --alluredir=allure-results"
+      sh -c "
+        echo '⏳ 等待 Mock 服务就绪...' &&
+        while ! python -c \"import requests; requests.get('http://mock:5000/posts', timeout=1)\" 2>/dev/null; do
+          echo '等待 mock:5000...' &&
+          sleep 1;
+        done &&
+        echo '✅ Mock 服务已就绪' &&
+        python -m pytest cases/ -v --alluredir=allure-results
+      "
+    volumes:
+      - ./allure-results:/app/allure-results
 
 volumes:
   mysql_data:

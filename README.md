@@ -255,7 +255,7 @@ python common/quality_gate.py
 ![MySQL Integration](assets/v2/allure_mysql_integration.png)
 
 ### 质量门禁 100% 通过
-![Quality Gate 100%](assets/v2/allure_overview_100pass.png)
+![Quality Gate 100%](assets/v2/quality_gate_pass.png)
 
 ### Locust 性能压测（21,653 请求，99.89% 成功率）
 
@@ -298,10 +298,10 @@ python common/quality_gate.py
 ### 抓包截图示例
 
 **HTTP 流完整对话：**
-![HTTP Stream](https://assets/v2/debug_http_stream.png)
+![HTTP Stream](assets/v2/debug_http_stream.png)
 
 **数据包列表：**
-![Packet List](https://assets/v2/debug_packet_list.png)
+![Packet List](assets/v2/debug_packet_list.png)
 
 ---
 
