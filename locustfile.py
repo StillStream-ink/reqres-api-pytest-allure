@@ -42,7 +42,19 @@ class ApiUser(HttpUser):
         """获取用户信息 - 权重 1"""
         self.client.get("/users/1")
 
+    @task(1)
+    def get_comments_list(self):
+        """获取评论列表 - 权重 1"""
+        self.client.get("/comments")
+
+    @task(1)
+    def create_comment(self):
+        """创建评论 - 权重 1"""
+        self.client.post(
+            "/comments",
+            json={"post_id": 1, "content": "Locust压测评论", "user_id": 1}
+        )
+
     def on_start(self):
         """模拟用户登录（每个用户启动时执行）"""
-        # 如果需要登录 token，可以在这里获取
         pass

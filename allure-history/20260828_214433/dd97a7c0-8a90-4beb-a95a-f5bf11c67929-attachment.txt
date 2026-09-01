@@ -1,0 +1,17 @@
+2026-08-28 19:47:09,431 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+2026-08-28 19:47:10,971 - ERROR - ❌ 用例失败：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50]，错误信息：<ExceptionInfo AssertionError('❌ 并发 50 成功率 98.40% < 99%\nassert 98.4 >= 99') tblen=39>
+2026-08-28 19:47:11,498 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+
+2026-08-28 19:47:12,522 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+2026-08-28 19:47:13,426 - ERROR - ❌ 用例失败：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50]，错误信息：<ExceptionInfo AssertionError('❌ 并发 50 成功率 98.00% < 99%\nassert 98.0 >= 99') tblen=39>
+2026-08-28 19:47:13,446 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+
+2026-08-28 19:47:14,470 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+2026-08-28 19:47:15,235 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+
+2026-08-28 19:47:15,253 - INFO - 🧹 数据库文件已清理
+2026-08-28 19:47:15,256 - INFO - 🧹 开始清理测试数据...
+2026-08-28 19:47:15,282 - INFO - ✅ 数据库已重置，测试数据已清理

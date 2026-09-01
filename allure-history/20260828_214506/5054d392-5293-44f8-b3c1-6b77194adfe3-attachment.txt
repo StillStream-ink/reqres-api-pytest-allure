@@ -1,0 +1,7 @@
+2026-08-28 19:46:38,719 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+2026-08-28 19:46:38,817 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+
+2026-08-28 19:46:39,324 - INFO - 🧹 数据库文件已清理（重试成功）
+2026-08-28 19:46:39,326 - INFO - 🧹 开始清理测试数据...
+2026-08-28 19:46:39,359 - INFO - ✅ 数据库已重置，测试数据已清理

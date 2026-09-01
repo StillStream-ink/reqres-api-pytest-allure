@@ -1,0 +1,3 @@
+[32mINFO    [0m reqres_api:conftest.py:144 
+========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_update_post ==========
+[32mINFO    [0m reqres_api:conftest.py:147 ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_update_post ==========

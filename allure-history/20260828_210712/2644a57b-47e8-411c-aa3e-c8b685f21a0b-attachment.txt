@@ -1,0 +1,185 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[10] ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[10] ==========
+
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:51] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[33mWARNING [0m reqres_api:conftest.py:84 ⚠️ 数据库文件被占用，跳过清理
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:192 🧹 开始清理测试数据...
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[31m[1mERROR   [0m common.mock_server:app.py:875 Exception on /posts/1 [GET]
+Traceback (most recent call last):
+  File "D:\Python311\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python311\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python311\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Python311\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\reqres_api_test\common\mock_server.py", line 201, in get_post
+    c.execute("SELECT * FROM posts WHERE id = ?", (post_id,))
+sqlite3.OperationalError: no such table: posts
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[35m[1mGET /posts/1 HTTP/1.1[0m" 500 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "[33mGET /posts/1 HTTP/1.1[0m" 404 -
+[32mINFO    [0m reqres_api:conftest.py:194 ✅ 数据库已重置，测试数据已清理
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:52] "GET /posts/1 HTTP/1.1" 200 -

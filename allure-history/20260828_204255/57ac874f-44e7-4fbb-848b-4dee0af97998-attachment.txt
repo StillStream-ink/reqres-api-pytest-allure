@@ -1,0 +1,9 @@
+2026-08-28 19:47:39,669 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+2026-08-28 19:47:44,853 - ERROR - ❌ 用例失败：cases/test_performance.py::TestPerformance::test_posts_list_concurrent，错误信息：<ExceptionInfo AssertionError('❌ 最大响应时间 2.052s > 2s\nassert 2.0516531467437744 < 2.0\n +  where 2.0516531467437744 = max([0.20676660537719727, 0.13674044609069824, 0.1619863510131836, 0.11607646942138672, 0.08384108543395996, 0.20673871040344238, ...])') tblen=39>
+2026-08-28 19:47:45,874 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+
+2026-08-28 19:47:46,897 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+2026-08-28 19:47:51,166 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_list_concurrent ==========
+

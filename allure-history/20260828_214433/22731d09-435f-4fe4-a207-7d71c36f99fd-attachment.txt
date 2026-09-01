@@ -1,0 +1,12 @@
+2026-08-28 20:56:45,364 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========
+2026-08-28 20:56:45,528 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========
+
+2026-08-28 20:56:46,543 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========
+2026-08-28 20:56:47,770 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========
+
+2026-08-28 20:56:48,803 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========
+2026-08-28 20:56:50,095 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_products_list ==========
+

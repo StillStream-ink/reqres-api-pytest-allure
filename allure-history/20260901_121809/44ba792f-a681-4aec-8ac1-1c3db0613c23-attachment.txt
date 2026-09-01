@@ -1,0 +1,8 @@
+2026-08-28 20:58:19,053 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_create_comment_check_db ==========
+2026-08-28 20:58:19,240 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_comment_check_db ==========
+
+2026-08-28 20:58:20,246 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_create_comment_check_db ==========
+2026-08-28 20:58:21,523 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_create_comment_check_db ==========
+

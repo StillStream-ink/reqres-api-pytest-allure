@@ -257,6 +257,11 @@ python common/quality_gate.py
 ### 质量门禁 100% 通过
 ![Quality Gate 100%](assets/v2/allure_overview_100pass.png)
 
+### Locust 性能压测（21,653 请求，99.89% 成功率）
+
+![Locust Stats](assets/v2/locust_stats.png)
+
+在 50 并发下对 6 个核心接口进行压测，总请求数 21,653，失败 23 次，成功率 99.89%，平均响应时间 341ms，RPS 峰值达 150+。覆盖文章、商品、订单、评论、用户 5 个模块。
 
 ## 🔍 Wireshark 抓包调试
 

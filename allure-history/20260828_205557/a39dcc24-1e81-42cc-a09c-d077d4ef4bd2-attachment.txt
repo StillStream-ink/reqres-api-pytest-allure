@@ -1,0 +1,11 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_full_flow ==========
+[32mINFO    [0m reqres_api:test_user_flow.py:43 【步骤0】创建测试帖子
+[32mINFO    [0m reqres_api:test_user_flow.py:51 创建帖子成功，ID=66
+[32mINFO    [0m reqres_api:test_user_flow.py:55 【步骤1】获取帖子详情
+[32mINFO    [0m reqres_api:test_user_flow.py:61 查询帖子结果：{'body': '链路测试原始内容', 'id': 66, 'title': '链路测试-原始标题', 'userId': 1}
+[32mINFO    [0m reqres_api:test_user_flow.py:67 【步骤2】更新帖子
+[32mINFO    [0m reqres_api:test_user_flow.py:73 更新帖子结果：{'body': '链路测试-更新后的内容', 'id': 66, 'title': '链路测试-更新后的标题', 'userId': 1}
+[32mINFO    [0m reqres_api:test_user_flow.py:79 【步骤3】删除帖子
+[32mINFO    [0m reqres_api:test_user_flow.py:85 删除帖子结果：{'message': 'Deleted'}
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_full_flow ==========

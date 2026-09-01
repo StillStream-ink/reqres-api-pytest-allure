@@ -1,0 +1,3 @@
+INFO     reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_order ==========
+INFO     reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_order ==========

@@ -1,0 +1,4 @@
+2026-08-28 19:47:04,319 - INFO - 
+========== 🚀 开始执行用例：cases/test_mysql_demo.py::test_mysql_update_post ==========
+2026-08-28 19:47:04,428 - INFO - ========== ✅ 用例执行结束：cases/test_mysql_demo.py::test_mysql_update_post ==========
+

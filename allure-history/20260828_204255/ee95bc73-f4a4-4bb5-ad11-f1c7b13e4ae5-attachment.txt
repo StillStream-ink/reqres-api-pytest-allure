@@ -1,0 +1,17 @@
+[32mINFO    [0m reqres_api:conftest.py:142 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "PUT /comments/4 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "GET /comments/5 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "DELETE /comments/6 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "[33mGET /comments/6 HTTP/1.1[0m" 404 -
+[1m[31mERROR   [0m common.http_util:http_util.py:36 📥 响应: 404 | Body: {"error":"Not found"}
+[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:28] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m reqres_api:conftest.py:181 🧹 开始清理测试数据...
+[33mWARNING [0m reqres_api:conftest.py:185 ⚠️ 数据清理失败: table posts already exists
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:41:29] "[33mPUT /comments/8 HTTP/1.1[0m" 404 -

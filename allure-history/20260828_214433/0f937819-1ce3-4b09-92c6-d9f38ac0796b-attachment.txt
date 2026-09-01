@@ -1,0 +1,2 @@
+2026-08-28 19:36:46,037 - INFO - ========== ✅ 用例执行结束：cases/test_user_flow.py::test_user_full_flow ==========
+

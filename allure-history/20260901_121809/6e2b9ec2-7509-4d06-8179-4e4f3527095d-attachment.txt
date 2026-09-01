@@ -1,0 +1,7 @@
+2026-08-28 19:47:51,192 - INFO - 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[10] ==========
+2026-08-28 19:47:51,805 - INFO - ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[10] ==========
+
+2026-08-28 19:47:52,323 - WARNING - ⚠️ 数据库文件被占用，跳过清理
+2026-08-28 19:47:52,330 - INFO - 🧹 开始清理测试数据...
+2026-08-28 19:47:52,447 - INFO - ✅ 数据库已重置，测试数据已清理
