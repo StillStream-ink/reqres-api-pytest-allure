@@ -6,11 +6,12 @@ environments:
     base_url: "http://127.0.0.1:5000"
     timeout: 10
     db_name: "test_mock.db"
-    db_host: "127.0.0.1"
-    db_port: 3307
-    db_user: "root"
-    db_password: "Toward123456"
-    db_database: "my_test_db"
+    # MySQL 配置（USE_MYSQL=False 时用不到，保留供未来扩展）
+    # db_host: "127.0.0.1"
+    # db_port: 3307
+    # db_user: "root"
+    # db_password: ""    # 从环境变量 MYSQL_PASSWORD 注入
+    # db_database: "my_test_db"
 
   test:
     base_url: "http://192.168.1.100:8080"

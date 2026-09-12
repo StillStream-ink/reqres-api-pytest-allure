@@ -1,0 +1,8 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+[1m[31mERROR   [0m common.http_util:http_util.py:36 📥 响应: 404 | Body: {"error":"Not found"}
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_comment ==========
+
+[32mINFO    [0m reqres_api:conftest.py:82 🧹 数据库文件已清理（重试成功）
+[32mINFO    [0m reqres_api:conftest.py:192 🧹 开始清理测试数据...
+[32mINFO    [0m reqres_api:conftest.py:194 ✅ 数据库已重置，测试数据已清理

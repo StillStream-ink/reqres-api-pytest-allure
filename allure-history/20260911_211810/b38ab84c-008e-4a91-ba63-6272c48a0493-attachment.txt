@@ -1,0 +1,20 @@
+[32mINFO    [0m reqres_api:conftest.py:142 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
+[32mINFO    [0m reqres_api:test_api_demo.py:40 ==== Fixture前置：创建测试文章 ====
+[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
+
+[32mINFO    [0m reqres_api:test_api_demo.py:49 ==== Fixture清理：删除文章 5 ====
+[32mINFO    [0m reqres_api:conftest.py:181 🧹 开始清理测试数据...
+[32mINFO    [0m reqres_api:conftest.py:183 ✅ 数据库已重置，测试数据已清理
+[32mINFO    [0m reqres_api:conftest.py:142 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
+[32mINFO    [0m reqres_api:conftest.py:60 ✅ Mock 服务已就绪: http://127.0.0.1:5000
+[32mINFO    [0m werkzeug:_internal.py:97 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[32mINFO    [0m werkzeug:_internal.py:97 [33mPress CTRL+C to quit[0m
+[32mINFO    [0m reqres_api:test_api_demo.py:40 ==== Fixture前置：创建测试文章 ====
+[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
+
+[32mINFO    [0m reqres_api:test_api_demo.py:49 ==== Fixture清理：删除文章 5 ====
+[32mINFO    [0m reqres_api:conftest.py:181 🧹 开始清理测试数据...
+[32mINFO    [0m reqres_api:conftest.py:183 ✅ 数据库已重置，测试数据已清理

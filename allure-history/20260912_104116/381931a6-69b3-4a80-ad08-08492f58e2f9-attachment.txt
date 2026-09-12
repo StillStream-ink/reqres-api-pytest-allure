@@ -1,0 +1,8 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_api_data_driven.py::test_post_single ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:03] "PUT /products/5 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:03] "DELETE /products/6 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:03] "GET /posts/1 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_api_data_driven.py::test_post_single ==========
+
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:47:03] "[33mGET /products/6 HTTP/1.1[0m" 404 -

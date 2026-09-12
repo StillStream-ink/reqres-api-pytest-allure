@@ -1,0 +1,7 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_single_comment ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:45:43] "PUT /comments/3 HTTP/1.1" 200 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:45:43] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:45:43] "[35m[1mPOST /comments HTTP/1.1[0m" 201 -
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [28/Aug/2026 19:45:43] "GET /comments/4 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_comment ==========

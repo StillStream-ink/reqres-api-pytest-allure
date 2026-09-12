@@ -1,0 +1,8 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_user_flow.py::test_post_put_empty_body ==========
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [29/Aug/2026 16:00:44] "[35m[1mPOST /posts HTTP/1.1[0m" 201 -
+[32mINFO    [0m reqres_api:test_user_flow.py:162 【异常用例】帖子更新传入空body
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [29/Aug/2026 16:00:44] "PUT /posts/119 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:test_user_flow.py:164 空body更新响应：{'body': 'test', 'id': 119, 'title': '空数据测试', 'userId': 1}
+[32mINFO    [0m werkzeug:_internal.py:97 127.0.0.1 - - [29/Aug/2026 16:00:44] "DELETE /posts/119 HTTP/1.1" 200 -
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_user_flow.py::test_post_put_empty_body ==========

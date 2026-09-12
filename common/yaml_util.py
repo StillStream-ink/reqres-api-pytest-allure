@@ -15,5 +15,7 @@ def replace_placeholder(text, data):
     pattern = re.compile(r"\{(\w+)\}")
     def repl(match):
         key = match.group(1)
-        return str(data.get(key, ""))
+        if key not in data:
+            raise KeyError(f"占位符 {{{key}}} 在数据中不存在，请检查 YAML 配置")
+        return str(data[key])
     return pattern.sub(repl, text)

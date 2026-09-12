@@ -20,6 +20,11 @@ def get_env_config(env_name=None):
     env = env_name or os.environ.get("API_ENV", config.get("current", "dev"))
     env_config = config["environments"].get(env, config["environments"]["dev"])
     env_config["env_name"] = env
+
+    # ✅ 从环境变量注入敏感信息，避免硬编码到 YAML
+    if "db_password" in env_config:
+        env_config["db_password"] = os.environ.get("MYSQL_PASSWORD", "")
+
     return env_config
 
 

@@ -1,0 +1,8 @@
+[32mINFO    [0m reqres_api:conftest.py:142 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_delete_post ==========
+[32mINFO    [0m reqres_api:conftest.py:60 ✅ Mock 服务已就绪: http://127.0.0.1:5000
+[32mINFO    [0m werkzeug:_internal.py:97 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[32mINFO    [0m werkzeug:_internal.py:97 [33mPress CTRL+C to quit[0m
+[1m[31mERROR   [0m common.http_util:http_util.py:36 📥 响应: 404 | Body: {"error":"Not found"}
+[32mINFO    [0m reqres_api:conftest.py:145 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_delete_post ==========

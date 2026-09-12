@@ -16,7 +16,7 @@
 |------|------|
 | 📝 总用例数 | 64 个（59 passed + 5 skipped） |
 | ✅ 通过率 | 100%（有效通过率） |
-| ⏱️ 执行时间 | ~7.59 秒（全量回归） |
+| ⏱️ 执行时间 | ~10 秒（全量回归） |
 | ⭐ 平均评分 | 20.0/20 |
 | 🧩 业务模块 | 5 个（文章/商品/订单/评论/用户） |
 | 🔌 Schema 校验 | 32 个接口 |
@@ -33,16 +33,17 @@
 - [📊 报告预览](#-报告预览)
 - [🔍 Wireshark 抓包调试](#-wireshark-抓包调试)
 - [📋 测试范围](#-测试范围)
-- [🎯 企业级能力清单](#-企业级能力清单)
+- [🎯 核心能力清单](#-核心能力清单)
 - [💡 踩坑记录](#-踩坑记录)
+- [🔒 安全说明](#-安全说明)
 - [🎯 拓展方向](#-拓展方向)
 
 ---
 
 ## ✨ 核心亮点
 
-### V1：工程化框架（外部 API）
-- **统一 HTTP 封装**：集成 `tenacity` 自动重试，解决公网 Mock 接口网络抖动
+### V1：工程化框架
+- **统一 HTTP 封装**：集成 `tenacity` 自动重试，解决网络抖动
 - **工程化分层**：公共工具层、测试数据层、业务用例层解耦，易维护、易扩展
 - **YAML 数据驱动**：接口地址、请求参数、预期断言全部外置，新增用例零代码改动
 - **Fixture 链路传递**：上下游接口参数自动传递，支持完整业务链路串行测试
@@ -51,12 +52,12 @@
 
 ### V2：本地 Mock + 质量门禁
 - **自研 Flask + SQLite Mock 服务**：彻底消除外部 API 不稳定导致的 `xfail` / `skip`
-- **接口 + 数据库双检**：接口返回成功后，直连 SQLite / MySQL 校验数据真实落库
+- **接口 + 数据库双检**：接口返回成功后，直连数据库校验数据真实落库
 - **质量门禁脚本**：Allure 结果通过率低于 90% 自动阻断 CI，防止低质量代码发布
 - **多环境一键切换**：`API_ENV=test pytest` 即可切换测试环境，无需改动任何代码
 - **Allure 步骤拆解**：请求/响应/数据库记录/日志全部附件留痕，单用例可追溯、可排查
 
-### V3：企业级进阶能力
+### V3：进阶能力
 - **JSON Schema 校验**：自动验证响应数据结构，覆盖 32 个接口，确保字段类型和必填字段符合预期
 - **并发执行加速**：集成 `pytest-xdist`，用例并行执行，效率提升 10 倍以上
 - **测试数据自动清理**：每次测试结束后自动重置数据库，恢复到预置数据干净状态
@@ -97,7 +98,7 @@ reqres-api-pytest-allure/
 ├── 📁 cases/                      # 测试用例目录
 │   ├── test_api_demo.py           # 核心用例（30 个）
 │   ├── test_api_data_driven.py    # 数据驱动用例（13 个）
-│   ├── test_mysql_demo.py         # MySQL 集成测试（3 个）
+│   ├── test_mysql_demo.py         # MySQL 集成测试（默认 skip）
 │   ├── test_user_flow.py          # 用户/帖子全链路（13 个）
 │   └── test_performance.py        # 性能测试（5 个）
 ├── 📁 common/                     # 公共工具层
@@ -108,7 +109,7 @@ reqres-api-pytest-allure/
 │   ├── assert_util.py             # 断言封装
 │   ├── schema_util.py             # JSON Schema 校验工具
 │   ├── db_checker.py              # 数据库双检公共函数
-│   ├── feishu_notify.py           # 飞书通知
+│   ├── feishu_notify.py           # 飞书通知（Webhook 从环境变量读取）
 │   └── yaml_util.py               # YAML 读取
 ├── 📁 config/                     # 配置层
 │   ├── api_data.yaml              # 接口定义
@@ -174,11 +175,10 @@ environments:
 
 | 场景 | 命令 |
 |------|------|
-| 本地开发（默认 dev） | `pytest` |
-| 切换 test 环境 | `API_ENV=test pytest` |
-| 切换 prod 环境 | `API_ENV=prod pytest` |
-| 切换 docker 环境 | `API_ENV=docker pytest` |
-| Windows PowerShell | `$env:API_ENV="test"; pytest` |
+| 本地开发（默认 dev） | `py -m pytest` |
+| 切换 test 环境 | `$env:API_ENV="test"; py -m pytest` |
+| 切换 prod 环境 | `$env:API_ENV="prod"; py -m pytest` |
+| 切换 docker 环境 | `$env:API_ENV="docker"; py -m pytest` |
 
 ---
 
@@ -195,7 +195,15 @@ cd reqres-api-pytest-allure
 pip install -r requirements.txt
 ```
 
-### 3. 启动 Mock 服务
+### 3. 配置环境变量（可选）
+
+飞书通知依赖 `FEISHU_WEBHOOK` 环境变量。不配置时会自动跳过：
+
+```powershell
+[Environment]::SetEnvironmentVariable("FEISHU_WEBHOOK", "你的飞书 Webhook 地址", "User")
+```
+
+### 4. 启动 Mock 服务
 
 **本地开发：**
 ```bash
@@ -207,31 +215,31 @@ python start_mock.py
 docker-compose up
 ```
 
-> `start_mock.py` 会自动识别运行环境（本地直接启动，Docker 中等待 MySQL 就绪后再启动）。
+> `start_mock.py` 会自动识别运行环境（本地直接启动，Docker 中等待依赖就绪后再启动）。
 
-### 4. 执行测试
+### 5. 执行测试
 ```bash
 # 运行核心用例（30 个）
-pytest cases/test_api_demo.py -v
+py -m pytest cases/test_api_demo.py -v
 
 # 并行运行（推荐）
-pytest cases/test_api_demo.py -n auto -v
+py -m pytest cases/test_api_demo.py -n auto -v
 
 # 运行全量回归（64 个用例）
-pytest cases/ -v
+py -m pytest cases/ -v
 
 # 切换 test 环境执行
-API_ENV=test pytest
+$env:API_ENV="test"; py -m pytest
 ```
 
-### 5. 生成 Allure 报告
+### 6. 生成 Allure 报告
 ```bash
 allure serve allure-results
 ```
 
-### 6. 质量门禁检查
+### 7. 质量门禁检查
 ```bash
-python common/quality_gate.py
+py common/quality_gate.py
 # 预期输出：✅ 质量门禁通过（有效通过率 100% > 阈值 90%）
 ```
 
@@ -250,9 +258,6 @@ python common/quality_gate.py
 
 ### 数据库双检步骤拆解
 ![DB Check Steps](assets/v2/allure_db_check_steps.png)
-
-### MySQL 集成测试
-![MySQL Integration](assets/v2/allure_mysql_integration.png)
 
 ### 质量门禁 100% 通过
 ![Quality Gate 100%](assets/v2/quality_gate_pass.png)
@@ -283,7 +288,7 @@ python common/quality_gate.py
 
 4. **运行测试用例**
    ```bash
-   pytest cases/test_api_demo.py -v
+   py -m pytest cases/test_api_demo.py -v
    ```
 
 5. **右键点击 HTTP 数据包** → 追踪流 → HTTP 流，查看完整请求和响应内容
@@ -323,29 +328,36 @@ python common/quality_gate.py
 |------|------|------|
 | 核心模块（文章/商品/订单/评论） | 30 | ✅ 全部通过 |
 | 数据驱动（`test_api_data_driven.py`） | 13 | ✅ 全部通过 |
-| MySQL 集成测试 | 3 | ✅ 全部通过 |
 | 性能测试（`test_performance.py`） | 5 | ✅ 全部通过 |
+| MySQL 集成测试（`test_mysql_demo.py`） | 3 | ⏭️ 默认跳过（详见下方说明） |
 | 用户/帖子模块（`test_user_flow.py`） | 13 | ✅ 8 passed + 5 skipped |
 | **合计** | **64** | **59 passed，5 skipped** |
 
+### 关于 skipped 用例
+
+- **MySQL 集成测试**：本项目 Mock 服务使用 SQLite 实现（`USE_MYSQL=False`），MySQL 相关用例在环境未就绪时自动跳过。需要启用时，配置 MySQL 环境变量后移除 `pytestmark` 即可。
+- **用户模块部分用例**：依赖更完整的用户业务流程，通过环境变量 `RUN_SKIPPED=1` 启用。
+
+**跳过用例不计入通过率分母**——质量门禁脚本已实现该逻辑，防止"跳过失败用例来凑通过率"。
+
 ---
 
-## 🎯 企业级能力清单
+## 🎯 核心能力清单
 
 | 能力 | 状态 |
 |------|------|
 | 接口功能测试（59 个用例） | ✅ |
-| 数据库双检（接口+DB 一致性） | ✅ |
+| 数据库双检（接口 + SQLite 一致性） | ✅ |
 | JSON Schema 校验（32 个接口） | ✅ |
 | Allure 可视化报告 | ✅ |
 | 报告自动归档（带时间戳） | ✅ |
 | 测试数据自动清理 | ✅ |
 | 并发执行加速（pytest-xdist） | ✅ |
 | 测试用例评分系统（0-20 分） | ✅ |
-| 飞书自动通知 | ✅ |
+| 飞书自动通知（Webhook 环境变量化） | ✅ |
 | Wireshark 抓包调试 | ✅ |
 | 性能测试（Locust） | ✅ |
-| 质量门禁（90% 阈值） | ✅ |
+| 质量门禁（90% 阈值，跳过不计入分母） | ✅ |
 | CI/CD（GitHub Actions） | ✅ |
 | Docker 一键运行 | ✅ |
 
@@ -361,6 +373,18 @@ python common/quality_gate.py
 | 并发执行时 `FileExistsError` | 多个 worker 同时创建目录 | 使用 `dirs_exist_ok=True` 和异常捕获 |
 | Docker 容器缺少 jsonschema | `requirements.txt` 未包含 | 添加 `jsonschema>=4.0.0` |
 | Wireshark 抓不到 5000 端口流量 | 没有选择回环网卡 | 必须选择 `Adapter for loopback traffic capture` |
+| 飞书 `post` 消息不支持 `lark_md` 标签 | 消息类型和标签不匹配 | 改用 `interactive` 卡片消息 |
+
+---
+
+## 🔒 安全说明
+
+本项目在安全方面做了以下处理：
+
+- **敏感信息环境变量化**：飞书 Webhook 地址、数据库密码通过环境变量注入，不硬编码到代码或配置文件中
+- **`.gitignore` 排除敏感文件**：`.env`、`allure-results/`、`reports/` 等运行产物不进仓库
+- **质量门禁防作弊**：跳过用例不计入通过率分母，避免"跳过失败用例凑数"
+- **最小权限原则**：Mock 服务按需连接数据库，不需要的数据库权限不授予
 
 ---
 
@@ -379,11 +403,10 @@ python common/quality_gate.py
 - ✅ 多环境配置分离，支持 dev / test / prod / docker 一键切换
 - ✅ Docker 容器化运行
 - ✅ 性能测试（Locust）
+- ✅ 敏感信息环境变量化
 - ⬜ 钉钉 / 企业微信消息推送
-- ⬜ 接入 MySQL 真实数据库，替换 SQLite
+- ⬜ 接入真实数据库，替换 SQLite Mock
 
 ---
 
 ⭐ 如果这个项目对你有帮助，请点个 Star 支持一下！
-   
- 

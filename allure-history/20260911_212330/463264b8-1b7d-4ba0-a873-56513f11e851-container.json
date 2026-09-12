@@ -1,0 +1,1 @@
+{"uuid": "fe1874f6-a195-476d-8c38-ab2c3636de76", "children": ["ee3773a5-7ed6-4e07-a47e-6ddc33439e0a"], "befores": [{"name": "allure_executor_info", "status": "passed", "start": 1787924680455, "stop": 1787924680455}], "afters": [{"name": "allure_executor_info::<lambda>", "start": 1787924680491}], "start": 1787924680455, "stop": 1787924680491}

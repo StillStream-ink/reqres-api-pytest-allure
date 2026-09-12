@@ -1,0 +1,13 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_performance.py::TestPerformance::test_posts_detail_concurrent[50] ==========
+
+[32mINFO    [0m reqres_api:conftest.py:77 🧹 数据库文件已清理
+[32mINFO    [0m reqres_api:conftest.py:192 🧹 开始清理测试数据...
+[32mINFO    [0m reqres_api:conftest.py:194 ✅ 数据库已重置，测试数据已清理

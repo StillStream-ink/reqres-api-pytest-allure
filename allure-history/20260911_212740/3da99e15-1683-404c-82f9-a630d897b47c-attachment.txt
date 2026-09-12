@@ -1,0 +1,12 @@
+2026-08-28 19:45:43,615 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+2026-08-28 19:45:43,786 - ERROR - ❌ 用例失败：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db，错误信息：<ExceptionInfo OperationalError('no such table: comments') tblen=41>
+2026-08-28 19:45:44,326 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+
+2026-08-28 19:45:45,338 - INFO - 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+2026-08-28 19:45:45,410 - INFO - ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_update_comment_check_db ==========
+
+2026-08-28 19:45:45,413 - INFO - 🧹 数据库文件已清理
+2026-08-28 19:45:45,415 - INFO - 🧹 开始清理测试数据...
+2026-08-28 19:45:45,443 - INFO - ✅ 数据库已重置，测试数据已清理

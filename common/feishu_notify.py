@@ -1,11 +1,9 @@
-# common/feishu_notify.py
 import requests
-import json
-import sys
 import os
 
-# 从环境变量读取 Webhook 地址，方便在不同环境切换
-WEBHOOK_URL = os.environ.get("FEISHU_WEBHOOK", "https://open.feishu.cn/open-apis/bot/v2/hook/9bdcd568-c176-4fe6-acd3-d69d4177129e")
+# 从环境变量读取 Webhook 地址，不硬编码
+WEBHOOK_URL = os.environ.get("FEISHU_WEBHOOK", "")
+
 
 def send_feishu_message(title, content, status="success"):
     """
@@ -14,12 +12,13 @@ def send_feishu_message(title, content, status="success"):
     :param content: 消息内容
     :param status: 状态，success 或 failure，用于显示不同颜色的标题
     """
-    if not WEBHOOK_URL or WEBHOOK_URL == "请在这里粘贴你的完整 Webhook 地址":
-        print("⚠️ 警告：未配置飞书 Webhook，消息未发送")
+    if not WEBHOOK_URL:
+        print("⚠️ 未配置 FEISHU_WEBHOOK 环境变量，跳过飞书通知")
         return False
 
     # 根据状态选择颜色
     color = "green" if status == "success" else "red"
+
     # 构建卡片消息
     payload = {
         "msg_type": "interactive",
@@ -33,9 +32,7 @@ def send_feishu_message(title, content, status="success"):
                         "tag": "lark_md"
                     }
                 },
-                {
-                    "tag": "hr"
-                },
+                {"tag": "hr"},
                 {
                     "tag": "note",
                     "elements": [

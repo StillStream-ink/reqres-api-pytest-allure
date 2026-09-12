@@ -1,0 +1,9 @@
+[32mINFO    [0m reqres_api:conftest.py:153 
+========== 🚀 开始执行用例：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
+[32mINFO    [0m reqres_api:test_api_demo.py:40 ==== Fixture前置：创建测试文章 ====
+[32mINFO    [0m reqres_api:conftest.py:156 ========== ✅ 用例执行结束：cases/test_api_demo.py::TestPostAPI::test_get_single_post ==========
+
+[32mINFO    [0m reqres_api:test_api_demo.py:49 ==== Fixture清理：删除文章 5 ====
+[32mINFO    [0m reqres_api:conftest.py:77 🧹 数据库文件已清理
+[32mINFO    [0m reqres_api:conftest.py:192 🧹 开始清理测试数据...
+[32mINFO    [0m reqres_api:conftest.py:194 ✅ 数据库已重置，测试数据已清理

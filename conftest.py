@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pytest
 import threading
 import time
@@ -23,6 +22,7 @@ TIMEOUT = ENV_CONFIG["timeout"]
 DB_NAME = ENV_CONFIG["db_name"]
 ENV_NAME = ENV_CONFIG["env_name"]
 
+
 # ==================== 测试报告存档（历史趋势图） ====================
 def archive_results():
     """每次运行前把旧结果归档到 history/ 目录"""
@@ -38,8 +38,10 @@ def archive_results():
         except FileExistsError:
             logger.warning(f"⚠️ 历史结果已存在，跳过存档: {archive_path}")
 
+
 # 在 session 开始时执行归档
 archive_results()
+
 
 # ==================== 自动启动 Mock 服务 ====================
 @pytest.fixture(scope="session", autouse=True)
@@ -83,14 +85,17 @@ def live_server():
                 except PermissionError:
                     logger.warning("⚠️ 数据库文件被占用，跳过清理")
 
+
 # ==================== 全局 Fixtures ====================
 @pytest.fixture(scope="session")
 def base_url():
     return BASE_URL
 
+
 @pytest.fixture(scope="session")
 def api_timeout():
     return TIMEOUT
+
 
 @pytest.fixture(scope="function")
 def new_post_id(base_url, api_timeout):
@@ -106,19 +111,21 @@ def new_post_id(base_url, api_timeout):
     except Exception as e:
         logger.warning(f"清理文章 {post_id} 失败: {e}")
 
+
 @pytest.fixture(scope="session")
 def user_token():
     return "mock-token-for-testing" if ENV_NAME == "dev" else "test-token"
 
-# ==================== Allure 执行者信息 ====================
-@pytest.fixture(autouse=True)
+
+# ==================== Allure 执行者信息（session 级，只写一次） ====================
+@pytest.fixture(scope="session", autouse=True)
 def allure_executor_info():
-    """写入 executor.json，固定内容"""
+    """写入 executor.json，固定内容（整个测试会话只写一次）"""
     os.makedirs("allure-results", exist_ok=True)
 
     executor = {
-        "name": "Jenkins",
-        "type": "jenkins",
+        "name": "Local-Dev",
+        "type": "local",
         "buildName": "Local-Dev",
         "buildUrl": "",
         "reportName": "ReqRes API自动化报告"
@@ -126,9 +133,10 @@ def allure_executor_info():
     with open("allure-results/executor.json", "w", encoding="utf-8") as f:
         json.dump(executor, f, ensure_ascii=False, indent=2)
 
-@pytest.fixture(autouse=True)
+
+@pytest.fixture(scope="session", autouse=True)
 def allure_environment():
-    """自动生成 environment.properties（UTF-8 编码，支持中文）"""
+    """自动生成 environment.properties（UTF-8 编码，支持中文），整个会话只写一次"""
     os.makedirs("allure-results", exist_ok=True)
 
     env_content = f"""Project=ReqRes接口自动化测试
@@ -140,53 +148,27 @@ Python={platform.python_version()}
 System={platform.system()} {platform.release()}
 Executor=Local-Dev
 TestDesign=等价类划分、边界值分析、场景法
-Coverage=文章、商品、订单、评论、用户、MySQL集成测试
+Coverage=文章、商品、订单、评论、用户
 """
     with open("allure-results/environment.properties", "w", encoding="utf-8") as f:
         f.write(env_content)
 
+
 # ==================== pytest 全局钩子 ====================
 def pytest_runtest_setup(item):
-    # 初始化 item 上的请求/响应存储
-    item._last_request = None
-    item._last_response = None
     logger.info(f"\n========== 🚀 开始执行用例：{item.nodeid} ==========")
+
 
 def pytest_runtest_teardown(item):
     logger.info(f"========== ✅ 用例执行结束：{item.nodeid} ==========\n")
-    if hasattr(item, '_last_request'):
-        delattr(item, '_last_request')
-    if hasattr(item, '_last_response'):
-        delattr(item, '_last_response')
 
-def pytest_runtest_makereport(item, call):
-    if call.when == "call" and call.excinfo is not None:
-        logger.error(f"❌ 用例失败：{item.nodeid}，错误信息：{call.excinfo}")
 
-        last_req = getattr(item, '_last_request', None)
-        last_resp = getattr(item, '_last_response', None)
-
-        if last_req:
-            allure.attach(
-                f"URL: {last_req.get('url')}\nMethod: {last_req.get('method')}\nHeaders: {last_req.get('headers')}\nBody: {last_req.get('body')}",
-                name="失败时请求详情",
-                attachment_type=allure.attachment_type.TEXT
-            )
-        if last_resp:
-            allure.attach(
-                f"Status: {last_resp.status_code}\nBody: {last_resp.text}",
-                name="失败时响应详情",
-                attachment_type=allure.attachment_type.TEXT
-            )
-
-# ==================== 🆕 测试数据清理增强 ====================
+# ==================== 测试数据清理增强 ====================
 @pytest.fixture(scope="session", autouse=True)
 def clean_test_data():
-    """
-    测试结束后自动清理并重置数据库
-    """
-    yield  # 等待所有测试执行完毕
-    
+    """测试结束后自动清理并重置数据库"""
+    yield
+
     if ENV_NAME == "dev":
         try:
             logger.info("🧹 开始清理测试数据...")
@@ -195,49 +177,9 @@ def clean_test_data():
         except Exception as e:
             logger.warning(f"⚠️ 数据清理失败: {e}")
 
-# ==================== 🆕 飞书通知（测试完成后发送） ====================
-def pytest_sessionfinish(session, exitstatus):
-    """pytest 全部执行完毕后自动调用"""
-    try:
-        from common.feishu_notify import send_feishu_message
-        
-        # 使用 session 的统计信息
-        total = session.testscollected
-        
-        # 从 reporter 获取测试结果
-        reporter = session.config.pluginmanager.get_plugin("terminalreporter")
-        if reporter is None:
-            logger.warning("⚠️ 无法获取测试结果统计，跳过飞书通知")
-            return
-        
-        passed = len(reporter.stats.get('passed', []))
-        failed = len(reporter.stats.get('failed', []))
-        skipped = len(reporter.stats.get('skipped', []))
-        errors = len(reporter.stats.get('error', []))
-        
-        # 计算通过率
-        executed = passed + failed + errors
-        pass_rate = (passed / executed * 100) if executed > 0 else 0
 
-        status = "success" if failed == 0 and errors == 0 else "failure"
-        title = "🎉 自动化测试通过" if status == "success" else "❌ 自动化测试失败"
-        
-        content = f"""**执行结果摘要**
-📊 总用例: **{total}**
-✅ 通过: **{passed}**
-❌ 失败: **{failed}**
-⏭️ 跳过: **{skipped}**
-⚠️ 错误: **{errors}**
-📈 通过率: **{pass_rate:.2f}%**
-        """
-        
-        send_feishu_message(title, content, status)
-    except Exception as e:
-        logger.warning(f"⚠️ 飞书通知发送失败: {e}")
-
-# ==================== 🆕 测试用例评分系统 ====================
-
-# 存储用例评分数据
+# ==================== 测试用例评分系统 ====================
+# 全局变量：存储用例评分数据（供 makereport 和 sessionfinish 共享）
 test_scores = {}
 test_details = []
 
@@ -247,31 +189,28 @@ def pytest_runtest_makereport(item, call):
     """为每个用例计算评分"""
     outcome = yield
     report = outcome.get_result()
-    
+
     if report.when == "call":
-        # 获取用例名称
         test_name = item.nodeid
         duration = getattr(report, 'duration', 0)
-        
+
         # 基础分 10 分
         score = 10
-        
-        # 根据结果加减分
+
         if report.passed:
             score += 10
             if hasattr(report, 'rerun_count') and report.rerun_count > 0:
-                score += 2  # 重跑后通过，加2分（说明不稳定但最终通过）
+                score += 2
         elif report.failed:
             score -= 5
-        
-        # 耗时惩罚（超过 1 秒减 1 分）
+
+        # 耗时惩罚（超过 1 秒减分，最多减 5 分）
         if duration > 1.0:
-            score -= min(int(duration / 2), 5)  # 最多减5分
-        
-        # 评分范围控制在 0-20 之间
+            score -= min(int(duration / 2), 5)
+
+        # 评分范围控制在 0-20
         score = max(0, min(score, 20))
-        
-        # 保存数据
+
         test_scores[test_name] = score
         test_details.append({
             "name": test_name,
@@ -280,8 +219,7 @@ def pytest_runtest_makereport(item, call):
             "status": "PASSED" if report.passed else "FAILED",
             "rerun": getattr(report, 'rerun_count', 0)
         })
-        
-        # 在报告中展示评分
+
         allure.attach(
             f"⭐ 用例评分: {score}/20\n"
             f"⏱️ 耗时: {duration:.3f}s\n"
@@ -291,16 +229,48 @@ def pytest_runtest_makereport(item, call):
         )
 
 
+# ==================== 合并后的 sessionfinish：飞书通知 + 评分报告 ====================
 def pytest_sessionfinish(session, exitstatus):
-    """测试结束后生成评分报告"""
-    # 生成评分报告文件
+    """测试结束后：1) 发送飞书通知 2) 生成评分报告"""
+
+    # ---------- 1. 飞书通知 ----------
+    try:
+        from common.feishu_notify import send_feishu_message
+
+        total = session.testscollected
+        reporter = session.config.pluginmanager.get_plugin("terminalreporter")
+
+        if reporter is None:
+            logger.warning("⚠️ 无法获取测试结果统计，跳过飞书通知")
+        else:
+            passed = len(reporter.stats.get('passed', []))
+            failed = len(reporter.stats.get('failed', []))
+            skipped = len(reporter.stats.get('skipped', []))
+            errors = len(reporter.stats.get('error', []))
+
+            executed = passed + failed + errors
+            pass_rate = (passed / executed * 100) if executed > 0 else 0
+
+            status = "success" if failed == 0 and errors == 0 else "failure"
+            title = "🎉 自动化测试通过" if status == "success" else "❌ 自动化测试失败"
+
+            content = f"""**执行结果摘要**
+📊 总用例: **{total}**
+✅ 通过: **{passed}**
+❌ 失败: **{failed}**
+⏭️ 跳过: **{skipped}**
+⚠️ 错误: **{errors}**
+📈 通过率: **{pass_rate:.2f}%**
+            """
+            send_feishu_message(title, content, status)
+    except Exception as e:
+        logger.warning(f"⚠️ 飞书通知发送失败: {e}")
+
+    # ---------- 2. 评分报告 ----------
     if test_details:
-        score_report = "📊 测试用例评分报告\n"
-        score_report += "=" * 50 + "\n\n"
-        
-        # 按评分排序
+        score_report = "📊 测试用例评分报告\n" + "=" * 50 + "\n\n"
         sorted_details = sorted(test_details, key=lambda x: x["score"], reverse=True)
-        
+
         for i, detail in enumerate(sorted_details, 1):
             status_icon = "✅" if detail["status"] == "PASSED" else "❌"
             score_bar = "⭐" * (detail["score"] // 2) + "☆" * ((20 - detail["score"]) // 2)
@@ -310,8 +280,7 @@ def pytest_sessionfinish(session, exitstatus):
             if detail['rerun'] > 0:
                 score_report += f" | 🔄 重跑: {detail['rerun']}次"
             score_report += "\n\n"
-        
-        # 统计信息
+
         total = len(sorted_details)
         avg_score = sum(d["score"] for d in sorted_details) / total if total > 0 else 0
         score_report += "=" * 50 + "\n"
@@ -320,23 +289,23 @@ def pytest_sessionfinish(session, exitstatus):
         score_report += f"🏆 最高分: {max(d['score'] for d in sorted_details)}/20\n"
         score_report += f"📉 最低分: {min(d['score'] for d in sorted_details)}/20\n"
         score_report += f"⏱️ 最慢用例: {max(d['duration'] for d in sorted_details):.3f}s\n"
-        
-        # 保存到文件
+
         os.makedirs("reports", exist_ok=True)
         with open("reports/test_scores.txt", "w", encoding="utf-8") as f:
             f.write(score_report)
-        
+
         logger.info(f"📊 测试评分报告已生成: reports/test_scores.txt")
         logger.info(f"📈 平均评分: {avg_score:.1f}/20")
 
 
+# ==================== 终端输出评分摘要 ====================
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """在终端输出评分摘要"""
     if test_details:
         total = len(test_details)
         avg_score = sum(d["score"] for d in test_details) / total if total > 0 else 0
         passed = len([d for d in test_details if d["status"] == "PASSED"])
-        
+
         terminalreporter.write_sep("=", "📊 测试评分摘要")
         terminalreporter.write_line(f"  总用例: {total}")
         terminalreporter.write_line(f"  通过: {passed}")
