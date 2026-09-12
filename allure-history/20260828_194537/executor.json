@@ -1,7 +1,0 @@
-{
-  "name": "Jenkins",
-  "type": "jenkins",
-  "buildName": "Local-Dev",
-  "buildUrl": "",
-  "reportName": "ReqRes API自动化报告"
-}
