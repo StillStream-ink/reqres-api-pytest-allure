@@ -40,6 +40,8 @@ services:
         condition: service_healthy
     command: python start_mock.py
     restart: unless-stopped
+    volumes:
+      - ./test_mock.db:/app/test_mock.db   # 挂载数据库文件
 
   test:
     build: .
@@ -51,6 +53,9 @@ services:
       - API_ENV=docker
       - RUN_SKIPPED=1
       - USE_MYSQL=False
+    volumes:
+      - ./test_mock.db:/app/test_mock.db   # 挂载同一个文件
+      - ./allure-results:/app/allure-results
     command: >
       sh -c "
         echo '⏳ 等待 Mock 服务就绪...' &&
@@ -59,12 +64,11 @@ services:
           sleep 1;
         done &&
         echo '✅ Mock 服务已就绪' &&
-        echo '🗄️ 初始化数据库...' &&
+        echo '🗄️ 强制初始化数据库（test 容器）...' &&
         python -c \"from common.mock_server import init_db; init_db(); print('✅ 数据库初始化完成')\" &&
+        echo '🚀 开始执行测试...' &&
         python -m pytest cases/ -v --alluredir=allure-results
       "
-    volumes:
-      - ./allure-results:/app/allure-results
 
 volumes:
   mysql_data:
